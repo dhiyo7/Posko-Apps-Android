@@ -1,6 +1,7 @@
 package com.adit.poskoapp.webservices
 
 import com.adit.poskoapp.models.Bencana
+import com.adit.poskoapp.models.Posko
 import com.adit.poskoapp.models.User
 import com.adit.poskoapp.utils.PoskoUtils
 import com.google.gson.annotations.SerializedName
@@ -33,6 +34,7 @@ class PoskoAPI {
 }
 
 interface PengaduanAPIService {
+    /*API Endpoint Untuk Register dan Login*/
     @FormUrlEncoded
     @POST("api/login")
     fun login(
@@ -49,6 +51,8 @@ interface PengaduanAPIService {
         @Field("confirm_password") confirm_password: String? = null
     ): Call<WrappedResponse<User>>
 
+
+    /*API Untuk CRUD Bencana*/
     @GET("api/bencana")
     fun getBencana(): Call<WrappedListResponse<Bencana>>
 
@@ -78,8 +82,41 @@ interface PengaduanAPIService {
         @Path("id") id: Int,
         @Header("Authorization") token: String,
     ): Call<WrappedResponse<Bencana>>
+
+    /*API untuk CRUD posko*/
+    @GET("api/posko")
+    fun getPosko(): Call<WrappedListResponse<Posko>>
+
+    @FormUrlEncoded
+    @POST("api/posko")
+    fun postPosko(
+        @Header("Authorization") token: String,
+        @Field("nama") name: String,
+        @Field("foto") foto: String,
+        @Field("detail") detail: String,
+        @Field("date") date: String,
+    ): Call<WrappedResponse<Posko>>
+
+    @FormUrlEncoded
+    @PUT("api/posko/{id}")
+    fun editPosko(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+        @Field("nama") name: String,
+        @Field("foto") foto: String,
+        @Field("detail") detail: String,
+        @Field("date") date: String,
+    ): Call<WrappedResponse<Bencana>>
+
+    @DELETE("api/posko/{id}")
+    fun deletePosko(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+    ): Call<WrappedResponse<Bencana>>
 }
 
+
+/*Untuk membungkus response dari backend*/
 data class WrappedResponse<T>(
     @SerializedName("message") var message: String?,
     @SerializedName("status") var status: Int?,

@@ -12,16 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
         <activity
+            android:name=".PoskoActivity"
+            android:label="@string/title_activity_posko"
+            android:theme="@style/Theme.PoskoApp.NoActionBar"></activity>
+        <activity
             android:name=".BencanaActivity"
             android:label="@string/title_activity_bencana"
-            android:theme="@style/Theme.PoskoApp.NoActionBar"></activity>
+            android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity
             android:name=".CekActivity"
             android:label="@string/title_activity_cek"
             android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity android:name=".DonaturActivity" />
         <activity android:name=".PetugasActivity" />
-        <activity android:name=".PoskoActivity" />
         <activity android:name=".Bencana2Activity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

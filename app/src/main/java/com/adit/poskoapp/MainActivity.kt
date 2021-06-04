@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, BencanaActivity::class.java))
         })
         posko.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this, CekActivity::class.java))
+            startActivity(Intent(this, PoskoActivity::class.java))
         })
         petugas.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, PetugasActivity::class.java))

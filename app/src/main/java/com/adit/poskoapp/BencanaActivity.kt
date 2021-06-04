@@ -12,7 +12,7 @@ import com.adit.poskoapp.contracts.BencanaActivityContract
 import com.adit.poskoapp.databinding.ActivityBencanaBinding
 import com.adit.poskoapp.models.Bencana
 import com.adit.poskoapp.presenters.BencanaActivityPresenter
-import kotlinx.android.synthetic.main.content_scrolling.*
+import kotlinx.android.synthetic.main.content_bencana.*
 
 class BencanaActivity : AppCompatActivity(), BencanaActivityContract.View {
 
