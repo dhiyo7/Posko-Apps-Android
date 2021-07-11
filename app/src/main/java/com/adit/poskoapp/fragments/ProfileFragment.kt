@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adit.poskoapp.LoginActivity
+import com.adit.poskoapp.MainActivity
 import com.adit.poskoapp.R
 import com.adit.poskoapp.databinding.FragmentProfileBinding
 import com.adit.poskoapp.utils.PoskoUtils
@@ -55,7 +56,7 @@ class ProfileFragment : Fragment() {
     private fun checkAuthenticated(){
         val token = PoskoUtils.getToken(requireActivity())
         if(token == null || token.equals("UNDEFINED")){
-            startActivity(Intent(requireActivity(), LoginActivity::class.java).also { activity?.finish() })
+            startActivity(Intent(requireActivity(), MainActivity::class.java).also { activity?.finish() })
         }
     }
 }
