@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,5 +27,17 @@ class MainActivity : AppCompatActivity() {
         donatur.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, DonaturActivity::class.java))
         })
+
+        btnLogout.setOnClickListener {
+            PoskoUtils.clearToken(this@MainActivity)
+            checkAuthenticated()
+        }
+    }
+
+    private fun checkAuthenticated(){
+        val token = PoskoUtils.getToken(this@MainActivity)
+        if (token == null || token.equals("UNDEFINED")){
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java).also { finish() })
+        }
     }
 }

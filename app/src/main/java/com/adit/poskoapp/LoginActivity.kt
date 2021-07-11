@@ -52,10 +52,16 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
         Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun success(token: String) {
+    override fun success(token: String, level: String) {
         PoskoUtils.setToken(this, "Bearer ${token}")
         println("Token "+token)
-        startActivity(Intent(this, MainActivity::class.java)).also { finish() }
+        if(level == "Admin"){
+            startActivity(Intent(this, MainActivity::class.java)).also { finish() }
+        }else{
+            startActivity(Intent(this, PetugasBerandaActivity::class.java)).also { finish() }
+        }
+
+
     }
 
     override fun isLoading(state: Boolean) {
