@@ -7,9 +7,7 @@ import android.view.View
 import android.view.Window
 import androidx.fragment.app.Fragment
 import com.adit.poskoapp.databinding.ActivityMainBinding
-import com.adit.poskoapp.fragments.BerandaFragment
-import com.adit.poskoapp.fragments.PemberitahuanFragment
-import com.adit.poskoapp.fragments.ProfileFragment
+import com.adit.poskoapp.fragments.*
 import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,35 +22,34 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setContentView(R.layout.activity_main)
         moveFragment()
+//        getLevel()
 
+    }
 
-//        bencana.setOnClickListener(View.OnClickListener {
-//            startActivity(Intent(this, BencanaActivity::class.java))
-//        })
-//        posko.setOnClickListener(View.OnClickListener {
-//            startActivity(Intent(this, PoskoActivity::class.java))
-//        })
-//        petugas.setOnClickListener(View.OnClickListener {
-//            startActivity(Intent(this, PetugasActivity::class.java))
-//        })
-//        donatur.setOnClickListener(View.OnClickListener {
-//            startActivity(Intent(this, DonaturActivity::class.java))
-//        })
-//
-//        btnLogout.setOnClickListener {
-//            PoskoUtils.clearToken(this@MainActivity)
-//            checkAuthenticated()
-//        }
+    private fun getLevel() : String? {
+        val level = PoskoUtils.getLevel(this)
+        return level
     }
 
     private fun moveFragment() {
-        setFragment(BerandaFragment())
+        if(getLevel() == "Admin"){
+            setFragment(BerandaAdminFragment())
+        }else if(getLevel() == "Petugas"){
+            setFragment(BerandaPetugasFragment())
+        }else{
+            setFragment(BerandaFragment())
+        }
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.menu_home -> {
-                    setFragment(BerandaFragment())
+                    if(getLevel() == "Admin"){
+                        setFragment(BerandaAdminFragment())
+                    }else if(getLevel() == "Petugas"){
+                        setFragment(BerandaPetugasFragment())
+                    }else{
+                        setFragment(BerandaFragment())
+                    }
                 }
                 R.id.menu_notifikasi -> {
                     setFragment(PemberitahuanFragment())

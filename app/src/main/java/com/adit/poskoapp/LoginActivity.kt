@@ -53,15 +53,9 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
     }
 
     override fun success(token: String, level: String) {
-        PoskoUtils.setToken(this, "Bearer ${token}")
+        PoskoUtils.setToken(this, "Bearer ${token}", level)
         println("Token "+token)
-        if(level == "Admin"){
-            startActivity(Intent(this, MainActivity::class.java)).also { finish() }
-        }else{
-            startActivity(Intent(this, PetugasBerandaActivity::class.java)).also { finish() }
-        }
-
-
+        startActivity(Intent(this, MainActivity::class.java)).also { finish() }
     }
 
     override fun isLoading(state: Boolean) {

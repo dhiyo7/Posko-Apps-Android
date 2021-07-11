@@ -11,12 +11,22 @@ class PoskoUtils {
             return token?.getString("TOKEN", null)
         }
 
-        fun setToken(context: Context, token: String) {
+        fun getLevel (context: Context) : String? {
+            val level = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+            return level?.getString("LEVEL", null)
+        }
+
+        fun setToken(context: Context, token: String, level : String) {
             val pref = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
             pref.edit().apply {
                 putString("TOKEN", token)
+                putString("LEVEL", level)
                 apply()
             }
+        }
+
+        fun setObjectUserLogin(){
+
         }
 
         fun clearToken(context: Context) {
