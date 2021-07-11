@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
-        <activity android:name=".PetugasBerandaActivity"></activity>
+        <activity
+            android:name=".PenerimaanLogistikActivity"
+            android:theme="@style/Theme.PoskoApp.NoActionBar"></activity>
+        <activity android:name=".PetugasBerandaActivity" />
         <activity
             android:name=".PoskoActivity"
             android:label="@string/title_activity_posko"
@@ -24,10 +27,12 @@
             android:name=".CekActivity"
             android:label="@string/title_activity_cek"
             android:theme="@style/Theme.PoskoApp.NoActionBar" />
-        <activity android:name=".DonaturActivity" />
+        <activity
+            android:name=".DonaturActivity"
+            android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity android:name=".PetugasActivity" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

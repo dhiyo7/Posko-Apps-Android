@@ -7,9 +7,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Donatur(
     @SerializedName("id") var id : Int? = null,
-    @SerializedName("nama") var nama : String? = null,
-    @SerializedName("jenis_kebutuhan") var jenis_kebutuhan : String? = null,
-    @SerializedName("keterangan") var keterangan : String? = null,
-    @SerializedName("alamat") var alamat : String? = null,
-    @SerializedName("tanggal") var tanggal : String? = null,
+    @SerializedName("nama") var nama : String,
+    @SerializedName("jenis_kebutuhan") var jenis_kebutuhan : String,
+    @SerializedName("keterangan") var keterangan: String,
+    @SerializedName("alamat") var alamat : String,
+    @SerializedName("id_posko") var id_posko : String,
+    @SerializedName("tanggal") var tanggal : String
 ) : Parcelable

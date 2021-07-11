@@ -10,10 +10,10 @@ class PetugasBerandaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_petugas_beranda)
-        btnLogout.setOnClickListener {
-            PoskoUtils.clearToken(this@PetugasBerandaActivity)
-            checkAuthenticated()
-        }
+//        btnLogout.setOnClickListener {
+//            PoskoUtils.clearToken(this@PetugasBerandaActivity)
+//            checkAuthenticated()
+//        }
     }
 
     private fun checkAuthenticated(){
