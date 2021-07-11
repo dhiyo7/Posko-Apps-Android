@@ -34,8 +34,8 @@ class LoginActivityPresenter(v: LoginActivityContract.View) : LoginActivityContr
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null && body.status == 200) {
-                        view?.toast("Selamat datang ${body.data!!.name}")
-                        view?.success(body.data?.token!!)
+                        view?.toast("Selamat datang ${body.data!!.nama}")
+                        view?.success(body.data?.token!!, body.data?.level!!)
                     } else {
                         view?.toast("Login gagal, cek email dan password")
                     }
@@ -66,8 +66,8 @@ class LoginActivityPresenter(v: LoginActivityContract.View) : LoginActivityContr
                     if (response.isSuccessful) {
                         val body = response.body()
                         if (body != null && body.status == 200) {
-                            view?.toast("Selamat Datang ${body.data!!.name}")
-                            view?.success(body.data?.token!!)
+                            view?.toast("Selamat Datang ${body.data!!.nama}")
+                            view?.success(body.data?.token!!, body.data?.level!!)
                         } else {
                             view?.toast("Register Gagal, cek semua form")
                         }

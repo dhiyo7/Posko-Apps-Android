@@ -4,7 +4,7 @@ interface LoginActivityContract {
     /* Main funtion untuk terhubung ke View */
     interface View {
         fun toast(message: String)
-        fun success(token: String)
+        fun success(token: String, level: String)
         fun isLoading(state: Boolean)
         fun idError(err: String?)
         fun passwordError(err: String?)
