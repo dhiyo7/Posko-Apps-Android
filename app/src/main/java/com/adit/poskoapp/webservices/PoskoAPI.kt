@@ -1,8 +1,6 @@
 package com.adit.poskoapp.webservices
 
-import com.adit.poskoapp.models.Bencana
-import com.adit.poskoapp.models.Posko
-import com.adit.poskoapp.models.User
+import com.adit.poskoapp.models.*
 import com.adit.poskoapp.utils.PoskoUtils
 import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
@@ -113,6 +111,12 @@ interface PengaduanAPIService {
         @Path("id") id: Int,
         @Header("Authorization") token: String,
     ): Call<WrappedResponse<Bencana>>
+
+    @GET("api/donatur")
+    fun getDonatur() : Call<WrappedListResponse<Donatur>>
+
+    @GET("api/penerimaan-logistik")
+    fun getPenerimaanLogistik() : Call<WrappedListResponse<PenerimaanLogistik>>
 }
 
 

@@ -4,33 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DonaturActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".PenerimaanLogistikActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarDonatur"
+        android:id="@+id/appBarPenerimaanLogistik"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.PoskoApp.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbarLayoutDonatur"
+            android:id="@+id/toolbarLayoutPenerimaanLogistik"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbarDonatur">
+            app:toolbarId="@+id/toolbarPenerimaanLogistik">
 
             <ImageView
-                android:id="@+id/ivImageDonatur"
+                android:id="@+id/ivImagePenerimaanLogistik"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@mipmap/icon4"
+                android:src="@mipmap/icon3"
                 android:layout_gravity="center"/>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarDonatur"
+                android:id="@+id/toolbarPenerimaanLogistik"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -40,16 +41,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_donatur"/>
-
     <ProgressBar
-        android:id="@+id/loadingDonatur"
+        android:id="@+id/loadingPenerimaanLogistik"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/emptyDataDonatur"
+        android:id="@+id/emptyDataPenerimaanLogistik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tidak ada data"
@@ -57,5 +56,7 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_gravity="center"/>
+
+    <include layout="@layout/content_penerimaan_logistik"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
