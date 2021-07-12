@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.adit.poskoapp.BencanaActivity
-import com.adit.poskoapp.DonaturActivity
-import com.adit.poskoapp.PoskoActivity
-import com.adit.poskoapp.R
+import com.adit.poskoapp.*
 import com.adit.poskoapp.databinding.FragmentBerandaAdminBinding
 import com.adit.poskoapp.databinding.FragmentBerandaBinding
 
@@ -47,7 +44,7 @@ class BerandaAdminFragment : Fragment() {
         }
 
         binding.distribusi.setOnClickListener {
-            Toast.makeText(activity, "Under development", Toast.LENGTH_LONG).show()
+            startActivity(Intent(activity, DistribusiActivity::class.java))
         }
     }
 }

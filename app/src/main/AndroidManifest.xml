@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
+        <activity android:name=".DetailBencanaActivity"></activity>
+        <activity android:name=".DistribusiActivity" />
         <activity
             android:name=".PenerimaanLogistikActivity"
-            android:theme="@style/Theme.PoskoApp.NoActionBar"></activity>
+            android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity android:name=".PetugasBerandaActivity" />
         <activity
             android:name=".PoskoActivity"
