@@ -117,6 +117,9 @@ interface PengaduanAPIService {
 
     @GET("api/penerimaan-logistik")
     fun getPenerimaanLogistik() : Call<WrappedListResponse<PenerimaanLogistik>>
+
+    @GET("api/logistik-masuk")
+    fun getLogistikMasuk(@Header("Authorization") token: String?) : Call<WrappedListResponse<LogistikMasuk>>
 }
 
 

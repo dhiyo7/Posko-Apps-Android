@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogistikMasukActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLogistikMasuk"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.PoskoApp.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbarLayoutLogistikMasuk"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbarLogistikMasuk">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarLogistikMasuk"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:theme="@style/Theme.PoskoApp.PopupOverlay"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_logistik_masuk"/>
+
+    <ProgressBar
+        android:id="@+id/loadingLogistikMasuk"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/emptyDataLogistikMasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tidak ada data"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
