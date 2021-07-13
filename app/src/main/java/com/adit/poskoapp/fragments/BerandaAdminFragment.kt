@@ -28,7 +28,7 @@ class BerandaAdminFragment : Fragment() {
 
     private fun intent(){
         binding.petugas.setOnClickListener {
-            Toast.makeText(activity, "Under development", Toast.LENGTH_LONG).show()
+            startActivity(Intent(activity, PetugasActivity::class.java))
         }
 
         binding.posko.setOnClickListener {

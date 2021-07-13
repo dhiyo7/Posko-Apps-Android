@@ -120,6 +120,41 @@ interface PengaduanAPIService {
 
     @GET("api/logistik-masuk")
     fun getLogistikMasuk(@Header("Authorization") token: String?) : Call<WrappedListResponse<LogistikMasuk>>
+
+    @GET("api/petugas-posko")
+    fun getPetugasPosko(@Header("Authorization") token: String?) : Call<WrappedListResponse<Petugas>>
+
+    @FormUrlEncoded
+    @POST("api/petugas-posko")
+    fun createPetugasPosko(
+        @Header("Authorization") token: String?,
+        @Field("nama") nama : String,
+        @Field("username") username : String,
+        @Field("password") password : String,
+        @Field("konfirmasi_password") konfirmasi_password : String,
+        @Field("level") level : String,
+        @Field("id_posko") id_posko : String
+    ) : Call<WrappedResponse<Petugas>>
+
+    @FormUrlEncoded
+    @PUT("api/petugas-posko/{id}")
+    fun updatePetugasPosko(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Field("nama") nama : String,
+        @Field("username") username : String,
+        @Field("password") password : String,
+        @Field("konfirmasi_password") konfirmasi_password : String,
+        @Field("level") level : String,
+        @Field("id_posko") id_posko : String
+    ) : Call<WrappedResponse<Petugas>>
+
+    @DELETE("api/petugas-posko/{id}")
+    fun deletePetugasPosko(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+    ) : Call<WrappedResponse<Petugas>>
+
 }
 
 

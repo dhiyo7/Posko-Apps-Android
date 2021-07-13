@@ -15,4 +15,8 @@ data class Posko(
     @SerializedName("longitude") var longitude : String? = null,
     @SerializedName("latitude") var latitude : String? = null,
     @SerializedName("created_at") var created_at : String? = null,
-): Parcelable
+): Parcelable {
+    override fun toString(): String {
+        return nama!!
+    }
+}
