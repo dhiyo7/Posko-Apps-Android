@@ -1,6 +1,7 @@
 package com.adit.poskoapp.fragments
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,9 @@ import com.adit.poskoapp.contracts.BencanaActivityContract
 import com.adit.poskoapp.databinding.FragmentBerandaBinding
 import com.adit.poskoapp.models.Bencana
 import com.adit.poskoapp.presenters.BencanaActivityPresenter
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 
 class BerandaFragment : Fragment(), BencanaActivityContract.View {
     private var presenter : BencanaActivityContract.Interaction? = null
@@ -51,11 +55,23 @@ class BerandaFragment : Fragment(), BencanaActivityContract.View {
     }
 
     override fun attachToRecycle(bencana: List<Bencana>) {
-        binding.rvBencanaHomeFragment.apply {
+        binding.imageSlider.apply {
             adapterBencana = BencanaHorizontalAdapter(bencana, requireActivity())
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = adapterBencana
+            setSliderAdapter(adapterBencana)
+            setIndicatorAnimation(IndicatorAnimationType.WORM)
+            setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
+            setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+            setIndicatorSelectedColor(Color.WHITE);
+            setIndicatorUnselectedColor(Color.GRAY);
+            setScrollTimeInSec(4); //set scroll delay in seconds :
+            startAutoCycle();
+
         }
+//        binding.rvBencanaHomeFragment.apply {
+//            adapterBencana = BencanaHorizontalAdapter(bencana, requireActivity())
+//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//            adapter = adapterBencana
+//        }
     }
 
     override fun toast(message: String?) {

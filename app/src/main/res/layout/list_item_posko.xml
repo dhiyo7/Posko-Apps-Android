@@ -27,7 +27,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Posko : "
+                    android:text="NAMA POSKO : "
                     android:textSize="20sp"/>
 
                 <TextView
@@ -49,7 +49,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jumlah Pengungsi : "
+                    android:text="JUMLAH PENGUNGSI : "
                     android:textSize="16sp"/>
 
                 <TextView
@@ -69,7 +69,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tanggal :"
+                    android:text="KONTAK :"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tvKontak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tgl"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOKASI :"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -80,13 +98,55 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnMaps"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cek Lokasi"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"/>
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:text="Ubah"
+                    android:layout_marginRight="2dp"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/btnHapus"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp"
+                    android:text="Hapus"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/btnKebutuhanLogistik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:text="Kebutuhan Logistik"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/btnMaps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cek Lokasi"
+                    android:textSize="8sp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 

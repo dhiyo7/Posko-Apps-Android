@@ -31,7 +31,8 @@ class PoskoAdapter(private var data: List<Posko>, private var context: Context) 
         fun bind(posko: Posko, context: Context) {
             itemView.tvNamaPosko.text = posko.nama
             itemView.tvPengungsi.text = posko.jumlah_pengungsi
-            itemView.tvLokasi.text = posko.lokasi
+            itemView.tvKontak.text = posko.kontak_hp
+            itemView.tvLokasi.text= posko.lokasi
             itemView.btnMaps.setOnClickListener {
                 val pcc = LatLng(posko.latitude?.toDouble()!!, posko.longitude?.toDouble()!!)
                 val map = "http://maps.google.com/maps?q=loc:" + posko.latitude
