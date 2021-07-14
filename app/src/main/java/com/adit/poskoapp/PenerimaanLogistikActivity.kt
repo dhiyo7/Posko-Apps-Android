@@ -1,15 +1,18 @@
 package com.adit.poskoapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adit.poskoapp.adapters.PenerimaanLogistikAdapter
+import com.adit.poskoapp.adapters.onClickAdapterPenerimaan
 import com.adit.poskoapp.contracts.PenerimaanLogisitkContract
 import com.adit.poskoapp.databinding.ActivityPenerimaanLogistikBinding
 import com.adit.poskoapp.models.PenerimaanLogistik
 import com.adit.poskoapp.presenters.PenerimaanLogistikActivityPresenter
+import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.activity_penerimaan_logistik.*
 import kotlinx.android.synthetic.main.content_penerimaan_logistik.*
 
@@ -26,6 +29,11 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
         setSupportActionBar(findViewById(R.id.toolbarPenerimaanLogistik))
         binding.toolbarLayoutPenerimaanLogistik.title = "Daftar Penerimaan Logistik"
         setContentView(binding.root)
+        binding.fab.setOnClickListener { view ->
+            startActivity(Intent(this@PenerimaanLogistikActivity, CreateOrUpdatePenerimaanActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            })
+        }
     }
 
     override fun showToast(message: String) {
@@ -33,11 +41,24 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
     }
 
     override fun attachPenerimaanLogistikRecycler(data_penerimaan_logistik: List<PenerimaanLogistik>) {
-        penerimaanLogisitikAdapter = PenerimaanLogistikAdapter(data_penerimaan_logistik,this)
+        penerimaanLogisitikAdapter = PenerimaanLogistikAdapter(data_penerimaan_logistik,this, object: onClickAdapterPenerimaan{
+            override fun deleteData(data_penerimaan_logistik: PenerimaanLogistik) {
+                deleteData(data_penerimaan_logistik!!.id.toString())
+            }
+
+        })
         rvPenerimaanLogistik.apply {
             layoutManager = LinearLayoutManager(this@PenerimaanLogistikActivity)
             adapter = penerimaanLogisitikAdapter
         }
+    }
+
+    private fun deleteData(id : String){
+        val token = PoskoUtils.getToken(this)
+        presenter?.delete(token!!, id)
+        startActivity(Intent(this@PenerimaanLogistikActivity, PenerimaanLogistikActivity::class.java).also{
+            finish()
+        })
     }
 
     override fun showLoading() {
@@ -65,6 +86,7 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
             visibility = View.GONE
         }
     }
+
 
     private fun infoPenerimaanLogistik() = presenter?.infoPenerimaanLogistik()
 

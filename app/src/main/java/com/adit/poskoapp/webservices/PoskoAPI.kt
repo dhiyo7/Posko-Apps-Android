@@ -133,6 +133,37 @@ interface PengaduanAPIService {
     @GET("api/penerimaan-logistik")
     fun getPenerimaanLogistik() : Call<WrappedListResponse<PenerimaanLogistik>>
 
+    @FormUrlEncoded
+    @POST("api/penerimaan-logistik")
+    fun postPenerimaanLogistik(
+        @Header("Authorization") token: String?,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("jumlah") jumlah : String,
+        @Field("status") status : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<PenerimaanLogistik>>
+
+    @FormUrlEncoded
+    @PUT("api/penerimaan-logistik/{id}")
+    fun putPenerimaanLogistik(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("jumlah") jumlah : String,
+        @Field("status") status : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<PenerimaanLogistik>>
+
+    @DELETE("api/penerimaan-logistik/{id}")
+    fun deletePenerimaanLogistik(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+    ) : Call<WrappedResponse<PenerimaanLogistik>>
+
     @GET("api/logistik-masuk")
     fun getLogistikMasuk(@Header("Authorization") token: String?) : Call<WrappedListResponse<LogistikMasuk>>
 

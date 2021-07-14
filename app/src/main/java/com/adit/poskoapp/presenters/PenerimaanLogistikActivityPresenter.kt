@@ -5,6 +5,7 @@ import com.adit.poskoapp.contracts.PenerimaanLogisitkContract
 import com.adit.poskoapp.models.PenerimaanLogistik
 import com.adit.poskoapp.webservices.PoskoAPI
 import com.adit.poskoapp.webservices.WrappedListResponse
+import com.adit.poskoapp.webservices.WrappedResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,6 +47,29 @@ class PenerimaanLogistikActivityPresenter(v :  PenerimaanLogisitkContract.Peneri
                 view?.showToast("Can't connect to Server")
                 println(t.message)
                 view?.hideLoading()
+            }
+
+        })
+    }
+
+    override fun delete(token: String, id: String) {
+        val request = api.deletePenerimaanLogistik(token, id)
+        request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
+            override fun onResponse(
+                call: Call<WrappedResponse<PenerimaanLogistik>>,
+                response: Response<WrappedResponse<PenerimaanLogistik>>
+            ) {
+                if(response.isSuccessful){
+                    val body = response.body()
+                    if (body != null){
+                        view?.showToast(body.message!!)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<WrappedResponse<PenerimaanLogistik>>, t: Throwable) {
+                view?.showToast("Tidak bisa koneksi ke server")
+                println(t.message)
             }
 
         })
