@@ -4,6 +4,7 @@ import com.adit.poskoapp.contracts.DonaturActivityContract
 import com.adit.poskoapp.models.Donatur
 import com.adit.poskoapp.webservices.PoskoAPI
 import com.adit.poskoapp.webservices.WrappedListResponse
+import com.adit.poskoapp.webservices.WrappedResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +43,30 @@ class DonaturActivityPresenter(v: DonaturActivityContract.DonaturActivityView?) 
                 println(t.message)
                 view?.hideLoading()
             }
+        })
+    }
+
+    override fun delete(token: String, id: String) {
+        val request = api.deleteDonatur(token, id)
+        request.enqueue(object : Callback<WrappedResponse<Donatur>>{
+            override fun onResponse(
+                call: Call<WrappedResponse<Donatur>>,
+                response: Response<WrappedResponse<Donatur>>
+            ) {
+                if(response.isSuccessful){
+                    val body = response.body()
+                    if (body != null){
+                        view?.showToast(body.message!!)
+                        infoDonatur()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<WrappedResponse<Donatur>>, t: Throwable) {
+                view?.showToast("Tidak bisa koneksi ke server")
+            }
+
+
         })
     }
 

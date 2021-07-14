@@ -1,22 +1,20 @@
 package com.adit.poskoapp.contracts
 
-import com.adit.poskoapp.models.PenerimaanLogistik
+import com.adit.poskoapp.models.KebutuhanLogistik
 import com.adit.poskoapp.models.Posko
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
-interface PenerimaanLogisitkContract {
-    interface PenerimaanLogistikActivityView{
+interface KebutuhanLogistikActivityContract {
+    interface KebutuhanLogistikActivityView{
         fun showToast(message : String)
-        fun attachPenerimaanLogistikRecycler(data_penerimaan_logistik : List<PenerimaanLogistik>)
+        fun attachKebutuhanLogistikRecycler(kebutuhan_logistik : List<KebutuhanLogistik>)
         fun showLoading()
         fun hideLoading()
         fun showDataEmpty()
         fun hideDataEmpty()
     }
 
-    interface PenerimmaanLogistikPresenter{
-        fun infoPenerimaanLogistik()
+    interface KebutuhanLogistikPresenter{
+        fun infoKebutuhanLogistik(token : String)
         fun delete(token : String, id: String)
         fun destroy()
     }
@@ -36,4 +34,6 @@ interface PenerimaanLogisitkContract {
         fun getPosko()
         fun destroy()
     }
+
+
 }

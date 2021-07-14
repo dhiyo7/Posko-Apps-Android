@@ -29,7 +29,9 @@ class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActi
         binding.fab.setOnClickListener {
             startActivity(Intent(this@PetugasActivity, CreateAndUpdatePetugasActivity::class.java).apply {
                 putExtra("IS_NEW", true)
-            })
+            }).also{
+                finish()
+            }
         }
 
         setContentView(binding.root)

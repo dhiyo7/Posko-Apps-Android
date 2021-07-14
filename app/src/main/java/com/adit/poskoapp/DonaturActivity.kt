@@ -1,17 +1,21 @@
 package com.adit.poskoapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adit.poskoapp.adapters.DonaturAdapter
+import com.adit.poskoapp.adapters.onClickAdapterDonatur
 import com.adit.poskoapp.contracts.DonaturActivityContract
 import com.adit.poskoapp.databinding.ActivityDonaturBinding
 import com.adit.poskoapp.models.Donatur
 import com.adit.poskoapp.presenters.DonaturActivityPresenter
+import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.activity_donatur.*
 import kotlinx.android.synthetic.main.content_donatur.*
+import kotlinx.android.synthetic.main.list_item_donatur.view.*
 
 class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActivityView {
     private lateinit var binding : ActivityDonaturBinding
@@ -26,6 +30,23 @@ class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActi
         setSupportActionBar(findViewById(R.id.toolbarDonatur))
         binding.toolbarLayoutDonatur.title = "Daftar Donatur"
         setContentView(binding.root)
+
+        binding.fab.setOnClickListener { view ->
+            startActivity(Intent(this@DonaturActivity, CreateOrUpdateDonaturActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            }).also {
+                finish()
+            }
+        }
+
+        hideButtonWhenNotAuth()
+    }
+
+    private fun hideButtonWhenNotAuth(){
+        val token = PoskoUtils.getToken(this)
+        if(token == null || token.equals("UNDEFINED")){
+            binding.fab.visibility = View.GONE
+        }
     }
 
     override fun showToast(message: String) {
@@ -33,7 +54,12 @@ class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActi
     }
 
     override fun attachDonaturRecycler(data_donatur: List<Donatur>) {
-        donaturAdapter = DonaturAdapter(data_donatur, this)
+        donaturAdapter = DonaturAdapter(data_donatur, this, object : onClickAdapterDonatur{
+            override fun deleteData(data_donatur: Donatur) {
+                delete(data_donatur.id.toString())
+            }
+
+        })
         rvDonatur.apply {
             adapter = donaturAdapter
             layoutManager = LinearLayoutManager(this@DonaturActivity)
@@ -67,6 +93,12 @@ class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActi
     }
 
     private fun infoDonatur() = presenter?.infoDonatur()
+
+    private fun delete(id : String){
+        val token = PoskoUtils.getToken(this)
+        presenter?.delete(token!!, id)
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()

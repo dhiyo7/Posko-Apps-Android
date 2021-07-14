@@ -1,6 +1,7 @@
 package com.adit.poskoapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -12,6 +13,7 @@ import com.adit.poskoapp.contracts.PoskoActivityContract
 import com.adit.poskoapp.databinding.ActivityPoskoBinding
 import com.adit.poskoapp.models.Posko
 import com.adit.poskoapp.presenters.PoskoActivityPresenter
+import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.content_posko.*
 
 class PoskoActivity : AppCompatActivity() , PoskoActivityContract.View{
@@ -32,6 +34,14 @@ class PoskoActivity : AppCompatActivity() , PoskoActivityContract.View{
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }
+        hideButtonWhenNotAuth()
+    }
+
+    private fun hideButtonWhenNotAuth(){
+        val token = PoskoUtils.getToken(this)
+        if(token == null || token.equals("UNDEFINED")){
+            binding.fab.visibility = View.GONE
         }
     }
 

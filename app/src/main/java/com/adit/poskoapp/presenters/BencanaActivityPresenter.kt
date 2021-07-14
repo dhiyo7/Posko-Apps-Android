@@ -49,6 +49,7 @@ class BencanaActivityPresenter(v: BencanaActivityContract.View?) :
                     val body = response.body()
                     if (body != null){
                         view?.toast(body.message!!)
+                        allBencana()
                     }
                 }
             }

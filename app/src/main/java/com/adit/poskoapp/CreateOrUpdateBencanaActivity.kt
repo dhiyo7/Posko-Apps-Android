@@ -139,7 +139,9 @@ class CreateOrUpdateBencanaActivity : AppCompatActivity(), BencanaActivityContra
     }
 
     override fun success() {
-        val intent = Intent(this@CreateOrUpdateBencanaActivity, MainActivity::class.java)
+        val intent = Intent(this@CreateOrUpdateBencanaActivity, MainActivity::class.java).also{
+            finish()
+        }
         startActivity(intent)
     }
 

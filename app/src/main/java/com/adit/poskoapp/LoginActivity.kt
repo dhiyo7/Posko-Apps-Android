@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.adit.poskoapp.contracts.LoginActivityContract
+import com.adit.poskoapp.models.User
 import com.adit.poskoapp.presenters.LoginActivityPresenter
 import com.adit.poskoapp.utils.PoskoUtils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
@@ -52,7 +54,9 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
         Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun success(token: String, level: String) {
+    override fun success(token: String, level: String, list: User?) {
+        var gson = Gson()
+        var json : String = gson.toJson(list)
         PoskoUtils.setToken(this, "Bearer ${token}", level)
         println("Token "+token)
         startActivity(Intent(this, MainActivity::class.java)).also { finish() }
