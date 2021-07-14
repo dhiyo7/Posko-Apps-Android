@@ -65,4 +65,6 @@ dependencies {
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
+    implementation 'com.github.esafirm:android-image-picker:3.0.0-beta1'
+
 }

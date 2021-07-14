@@ -4,6 +4,7 @@ import com.adit.poskoapp.contracts.BencanaActivityContract
 import com.adit.poskoapp.models.Bencana
 import com.adit.poskoapp.webservices.PoskoAPI
 import com.adit.poskoapp.webservices.WrappedListResponse
+import com.adit.poskoapp.webservices.WrappedResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +36,27 @@ class BencanaActivityPresenter(v: BencanaActivityContract.View?) :
                 println("Log: ${t.message} ")
                 view?.toast("Cannot connect to server")
             }
+        })
+    }
+
+    override fun delete(token: String, id: String) {
+        api.deleteBencana(token, id.toInt()).enqueue(object : Callback<WrappedResponse<Bencana>>{
+            override fun onResponse(
+                call: Call<WrappedResponse<Bencana>>,
+                response: Response<WrappedResponse<Bencana>>
+            ) {
+                if(response.isSuccessful){
+                    val body = response.body()
+                    if (body != null){
+                        view?.toast(body.message!!)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<WrappedResponse<Bencana>>, t: Throwable) {
+                view?.toast("Tidak bisa koneksi ke server")
+            }
+
         })
     }
 

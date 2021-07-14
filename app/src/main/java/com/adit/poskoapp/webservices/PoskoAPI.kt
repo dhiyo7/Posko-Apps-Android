@@ -3,7 +3,9 @@ package com.adit.poskoapp.webservices
 import com.adit.poskoapp.models.*
 import com.adit.poskoapp.utils.PoskoUtils
 import com.google.gson.annotations.SerializedName
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -54,31 +56,44 @@ interface PengaduanAPIService {
     @GET("api/bencana")
     fun getBencana(): Call<WrappedListResponse<Bencana>>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("api/bencana")
     fun postBencana(
         @Header("Authorization") token: String,
-        @Field("nama") name: String,
-        @Field("foto") foto: String,
-        @Field("detail") detail: String,
-        @Field("date") date: String,
+        @Part("nama") name: RequestBody,
+        @Part foto: MultipartBody.Part,
+        @Part("detail") detail: RequestBody,
+        @Part("date") date: RequestBody,
     ): Call<WrappedResponse<Bencana>>
 
-    @FormUrlEncoded
-    @PUT("api/bencana/{id}")
+    @Multipart
+    @POST("api/bencana/{id}")
     fun editBencana(
-        @Path("id") id: Int,
         @Header("Authorization") token: String,
-        @Field("nama") name: String,
-        @Field("foto") foto: String,
-        @Field("detail") detail: String,
-        @Field("date") date: String,
+        @Path("id") id: Int,
+        @Part("nama") name: RequestBody,
+        @Part foto: MultipartBody.Part,
+        @Part("detail") detail: RequestBody,
+        @Part("date") date: RequestBody,
+        @Part("_method") method : RequestBody
     ): Call<WrappedResponse<Bencana>>
+
+    @Multipart
+    @POST("api/bencana/{id}")
+    fun editBencanaTanpaFoto(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int,
+        @Part("nama") name: RequestBody,
+        @Part("detail") detail: RequestBody,
+        @Part("date") date: RequestBody,
+        @Part("_method") method : RequestBody
+    ): Call<WrappedResponse<Bencana>>
+
 
     @DELETE("api/bencana/{id}")
     fun deleteBencana(
-        @Path("id") id: Int,
         @Header("Authorization") token: String,
+        @Path("id") id: Int,
     ): Call<WrappedResponse<Bencana>>
 
     /*API untuk CRUD posko*/

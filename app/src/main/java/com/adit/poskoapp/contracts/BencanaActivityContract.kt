@@ -1,6 +1,8 @@
 package com.adit.poskoapp.contracts
 
 import com.adit.poskoapp.models.Bencana
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 interface BencanaActivityContract {
     interface View {
@@ -11,42 +13,22 @@ interface BencanaActivityContract {
     }
 
     interface ViewCreate {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean?)
-    }
-
-    interface ViewEdit {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean)
-    }
-
-    interface ViewDelete {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean)
+        fun showToast(message: String?)
+        fun showLoading()
+        fun hideLoading()
+        fun success()
     }
 
     interface Interaction {
         fun allBencana()
+        fun delete(token:String, id: String)
         fun destroy()
     }
 
     interface InteractionPost {
-        fun validate(name: String, location: String, description: String): Boolean
-        fun save(token: String, name: String, location: String, description: String)
-        fun destroy()
-    }
-
-    interface InteractionUpdate {
-        fun validate(name: String, location: String, description: String): Boolean
-        fun update(id: Int, token: String, name: String, location: String, description: String)
-        fun destroy()
-    }
-
-    interface InteractionDelete {
-        fun delete(id: Int, token: String)
+        fun create(token: String, name: RequestBody, foto: MultipartBody.Part, detail : RequestBody, date: RequestBody)
+        fun update(token: String, id: String, name: RequestBody, foto: MultipartBody.Part, detail : RequestBody, date: RequestBody, method : RequestBody)
+        fun updateTanpaFoto(token: String, id: String, name: RequestBody, detail : RequestBody, date: RequestBody, method : RequestBody)
         fun destroy()
     }
 
