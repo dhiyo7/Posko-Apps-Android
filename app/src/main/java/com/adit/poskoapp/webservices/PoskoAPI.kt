@@ -130,6 +130,39 @@ interface PengaduanAPIService {
     @GET("api/donatur")
     fun getDonatur() : Call<WrappedListResponse<Donatur>>
 
+    @FormUrlEncoded
+    @POST("api/donatur")
+    fun postDonatur(
+        @Header("Authorization") token: String?,
+        @Field("nama") nama : String,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("alamat") alamat : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<Donatur>>
+
+    @FormUrlEncoded
+    @PUT("api/donatur/{id}")
+    fun putDonatur(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Field("nama") nama : String,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("alamat") alamat : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<Donatur>>
+
+    @DELETE("api/donatur/{id}")
+    fun deleteDonatur(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+    ) : Call<WrappedResponse<Donatur>>
+
+
+
     @GET("api/penerimaan-logistik")
     fun getPenerimaanLogistik() : Call<WrappedListResponse<PenerimaanLogistik>>
 
@@ -201,6 +234,42 @@ interface PengaduanAPIService {
         @Path("id") id : String,
     ) : Call<WrappedResponse<Petugas>>
 
+
+    @GET("api/kebutuhan-logistik")
+    fun getKebutuhan(
+        @Header("Authorization") token : String
+    ) : Call<WrappedListResponse<KebutuhanLogistik>>
+
+    @FormUrlEncoded
+    @POST("api/kebutuhan-logistik")
+    fun postKebutuhan(
+        @Header("Authorization") token: String?,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("jumlah") jumlah : String,
+        @Field("status") status : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<KebutuhanLogistik>>
+
+    @FormUrlEncoded
+    @PUT("api/kebutuhan-logistik/{id}")
+    fun putKebutuhan(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Field("id_posko") id_posko : String,
+        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
+        @Field("keterangan") keterangan : String,
+        @Field("jumlah") jumlah : String,
+        @Field("status") status : String,
+        @Field("tanggal") tanggal : String,
+    ) : Call<WrappedResponse<KebutuhanLogistik>>
+
+    @DELETE("api/kebutuhan-logistik/{id}")
+    fun deleteKebutuhan(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+    ) : Call<WrappedResponse<KebutuhanLogistik>>
 }
 
 

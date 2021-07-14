@@ -10,8 +10,10 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.Posko
+import com.adit.poskoapp.utils.PoskoUtils
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.list_item_posko.view.*
+import kotlinx.android.synthetic.main.list_item_posko.view.linearButton
 
 
 class PoskoAdapter(private var data: List<Posko>, private var context: Context) :
@@ -43,6 +45,13 @@ class PoskoAdapter(private var data: List<Posko>, private var context: Context) 
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 context.startActivity(mapIntent)
+            }
+
+            val token = PoskoUtils.getToken(context)
+            if(token == null || token.equals("UNDEFINED")){
+                itemView.linearButton.apply {
+                    visibility = View.GONE
+                }
             }
         }
 

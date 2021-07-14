@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.adit.poskoapp.DonaturActivity
-import com.adit.poskoapp.PenerimaanLogistikActivity
-import com.adit.poskoapp.PoskoActivity
-import com.adit.poskoapp.R
+import com.adit.poskoapp.*
 import com.adit.poskoapp.databinding.FragmentBerandaAdminBinding
 import com.adit.poskoapp.databinding.FragmentBerandaPetugasBinding
 
@@ -42,7 +39,7 @@ class BerandaPetugasFragment : Fragment() {
         }
 
         binding.kebutuhanLogistik.setOnClickListener {
-            Toast.makeText(activity, "Under Development", Toast.LENGTH_LONG).show()
+            startActivity(Intent(activity, KebutuhanLogistikActivity::class.java))
         }
     }
 }

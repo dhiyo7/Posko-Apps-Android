@@ -32,7 +32,18 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
         binding.fab.setOnClickListener { view ->
             startActivity(Intent(this@PenerimaanLogistikActivity, CreateOrUpdatePenerimaanActivity::class.java).apply {
                 putExtra("IS_NEW", true)
-            })
+            }).also{
+                finish()
+            }
+        }
+
+        hideButtonWhenNotAuth()
+    }
+
+    private fun hideButtonWhenNotAuth(){
+        val token = PoskoUtils.getToken(this)
+        if(token == null || token.equals("UNDEFINED")){
+            binding.fab.visibility = View.GONE
         }
     }
 

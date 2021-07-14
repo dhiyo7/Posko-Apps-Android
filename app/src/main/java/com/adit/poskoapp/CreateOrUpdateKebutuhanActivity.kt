@@ -4,35 +4,34 @@ import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.adit.poskoapp.contracts.PenerimaanLogisitkContract
-import com.adit.poskoapp.databinding.ActivityCreateOrUpdatePenerimaanBinding
+import com.adit.poskoapp.contracts.KebutuhanLogistikActivityContract
+import com.adit.poskoapp.databinding.ActivityCreateOrUpdateKebutuhanBinding
+import com.adit.poskoapp.databinding.ActivityKebutuhanLogistikBinding
+import com.adit.poskoapp.models.KebutuhanLogistik
 import com.adit.poskoapp.models.PenerimaanLogistik
-import com.adit.poskoapp.models.Petugas
 import com.adit.poskoapp.models.Posko
-import com.adit.poskoapp.presenters.CreateOrUpdatePenerimaanActivityPresenter
+import com.adit.poskoapp.presenters.CreateOrUpdateKebutuhanActivityPresenter
 import com.adit.poskoapp.utils.PoskoUtils
-import kotlinx.android.synthetic.main.activity_create_or_update_penerimaan.*
 
-class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitkContract.CreateOrUpdateView {
+class CreateOrUpdateKebutuhanActivity : AppCompatActivity(), KebutuhanLogistikActivityContract.CreateOrUpdateView {
 
-    private lateinit var binding: ActivityCreateOrUpdatePenerimaanBinding
-    private var presenter : PenerimaanLogisitkContract.CreateOrUpdateInteraction? = null
+    private lateinit var binding : ActivityCreateOrUpdateKebutuhanBinding
+    private var presenter : KebutuhanLogistikActivityContract.CreateOrUpdateInteraction? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = CreateOrUpdatePenerimaanActivityPresenter(this)
-        binding = ActivityCreateOrUpdatePenerimaanBinding.inflate(layoutInflater)
+        binding = ActivityCreateOrUpdateKebutuhanBinding.inflate(layoutInflater)
+        presenter = CreateOrUpdateKebutuhanActivityPresenter(this)
         setContentView(binding.root)
-        doSave()
         fill()
+        doSave()
     }
 
     override fun showToast(message: String?) {
-        Toast.makeText(this@CreateOrUpdatePenerimaanActivity, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showLoading() {
@@ -51,39 +50,39 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
     }
 
     override fun success() {
-        val intent = Intent(this@CreateOrUpdatePenerimaanActivity, PenerimaanLogistikActivity::class.java).also{
+        val intent = Intent(this@CreateOrUpdateKebutuhanActivity, KebutuhanLogistikActivity::class.java).also{
             finish()
         }
         startActivity(intent)
     }
 
     override fun attachToSpinner(posko: List<Posko>) {
-        var spinnerAdapterPosko = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, posko)
+        var spinnerAdapterPosko = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, posko)
         binding.poskopenerima.apply {
             adapter = spinnerAdapterPosko
         }
     }
 
-    private fun fill(){
+    override fun setSelectionSpinner(posko: List<Posko>) {
         if(!isNew()){
-            binding.etDate.setText(getPenerimaan()?.tanggal)
-            binding.etJenis.setText(getPenerimaan()?.jenis_kebutuhan)
-            binding.etKeterangan.setText(getPenerimaan()?.keterangan)
-            binding.etJumlah.setText(getPenerimaan()?.jumlah.toString())
+            for(item in posko.indices){
+                if(posko[item].id == getKebutuhan()?.id_posko){
+                    binding.poskopenerima.setSelection(item)
+                }
+            }
         }
     }
 
     private fun isNew() : Boolean = intent.getBooleanExtra("IS_NEW", true)
 
-    private fun getPenerimaan() : PenerimaanLogistik? = intent.getParcelableExtra("PENERIMAAN")
+    private fun getKebutuhan() : KebutuhanLogistik? = intent.getParcelableExtra("KEBUTUHAN")
 
-    override fun setSelectionSpinner(posko: List<Posko>) {
+    private fun fill(){
         if(!isNew()){
-            for(item in posko.indices){
-                if(posko[item].id == getPenerimaan()?.id_posko){
-                    binding.poskopenerima.setSelection(item)
-                }
-            }
+            binding.etDate.setText(getKebutuhan()?.tanggal)
+            binding.etJenis.setText(getKebutuhan()?.jenis_kebutuhan)
+            binding.etKeterangan.setText(getKebutuhan()?.keterangan)
+            binding.etJumlah.setText(getKebutuhan()?.jumlah.toString())
         }
     }
 
@@ -96,13 +95,13 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
             var jenis_kebutuhan = binding.etJenis.text.toString()
             var keterangan = binding.etKeterangan.text.toString()
             var jumlah = binding.etJumlah.text.toString()
-            var status = "Proses"
+            var status = "Belum Terpenuhi"
             var tanggal = binding.etDate.text.toString()
 
             if(isNew()){
                 presenter?.create(token!!,id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
             }else{
-                presenter?.update(token!!, getPenerimaan()?.id.toString(), id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+                presenter?.update(token!!, getKebutuhan()?.id.toString(), id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
             }
         }
 
@@ -121,6 +120,4 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
         super.onDestroy()
         presenter?.destroy()
     }
-
-
 }

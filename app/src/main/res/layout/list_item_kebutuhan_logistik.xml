@@ -25,42 +25,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NAMA : "
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/tvNama"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Nama Donatur"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="POSKO PENERIMA : "
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/tvPoskoPenerima"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Nama Posko Penerima"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="JENIS KEEBUTUHAN : "
                     android:textSize="14sp"/>
                 <TextView
@@ -97,15 +61,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ALAMAT : "
+                    android:text="JUMLAH : "
                     android:textSize="14sp"/>
+
                 <TextView
-                    android:id="@+id/tvAlamat"
+                    android:id="@+id/tvJumlah"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    android:text="10"
                     android:textSize="14sp"
-                    android:text="Jalan Yang Benar"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +92,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adit.poskoapp.CreateOrUpdatePenerimaanActivity
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.PenerimaanLogistik
+import com.adit.poskoapp.utils.PoskoUtils
 import kotlinx.android.synthetic.main.list_item_penerimaan_logistik.view.*
 
 class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<PenerimaanLogistik>, private var context : Context, private var listener : onClickAdapterPenerimaan) : RecyclerView.Adapter<PenerimaanLogistikAdapter.MyHolder>(){
@@ -24,6 +25,13 @@ class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<Pene
                     putExtra("PENERIMAAN", data_penerimaan_logistik)
                 }
                 context.startActivity(intent)
+            }
+
+            val token = PoskoUtils.getToken(context)
+            if(token == null || token.equals("UNDEFINED")){
+                itemView.linearButton.apply {
+                    visibility = View.GONE
+                }
             }
 
         }

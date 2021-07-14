@@ -110,7 +110,9 @@ class CreateAndUpdatePetugasActivity : AppCompatActivity(), PetugasActivityContr
     }
 
     override fun success() {
-        val intent = Intent(this@CreateAndUpdatePetugasActivity, PetugasActivity::class.java)
+        val intent = Intent(this@CreateAndUpdatePetugasActivity, PetugasActivity::class.java).also{
+            finish()
+        }
         startActivity(intent)
     }
 

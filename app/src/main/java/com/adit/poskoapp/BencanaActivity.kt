@@ -37,16 +37,18 @@ class BencanaActivity : AppCompatActivity(), BencanaActivityContract.View {
         binding.fab.setOnClickListener { view ->
             startActivity(Intent(this@BencanaActivity, CreateOrUpdateBencanaActivity::class.java).apply {
                 putExtra("IS_NEW", true)
-            })
+            }).also{
+                finish()
+            }
         }
     }
 
     private fun delete(id: String){
         val token = PoskoUtils.getToken(this)
         presenter?.delete(token!!, id)
-        startActivity(Intent(this@BencanaActivity, BencanaActivity::class.java).also{
-            finish()
-        })
+//        startActivity(Intent(this@BencanaActivity, BencanaActivity::class.java).also{
+//            finish()
+//        })
     }
 
     private fun getData () {
