@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class Bencana(
     @SerializedName ("id") var id : Int? = null,
     @SerializedName ("nama") var nama : String? = null,
-    @SerializedName ("foto") var foto : String? = null,
+    @SerializedName ("foto") var foto : String,
     @SerializedName ("detail") var detail : String? = null,
     @SerializedName ("date") var date : String? = null,
     @SerializedName ("created_at") var created_at : String? = null,
