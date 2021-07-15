@@ -13,12 +13,13 @@ class LogistikMasukAdapter(private var logistik_masuk : List<LogistikMasuk>, pri
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(logistik_masuk : LogistikMasuk, context: Context){
             itemView.tvPengirim.text = logistik_masuk.pengirim
-            itemView.tvPoskoPenerima.text = logistik_masuk.id_posko
+            itemView.tvPoskoPenerima.text = logistik_masuk.posko_penerima
             itemView.tvJenisKebutuhan.text = logistik_masuk.jumlah
             itemView.tvKeterangan.text = logistik_masuk.keterangan
             itemView.tvJumlah.text = logistik_masuk.jumlah
-            itemView.tvStatus.text = "Diterima"
+            itemView.tvStatus.text = logistik_masuk.status
             itemView.tvTanggal.text = logistik_masuk.tanggal
+            itemView.tvSatuan.text = logistik_masuk.satuan
         }
     }
 

@@ -218,9 +218,11 @@ interface PengaduanAPIService {
         @Part("keterangan") keterangan: RequestBody,
         @Part("jumlah") jumlah: RequestBody,
         @Part("pengirim") pengirim : RequestBody,
-        @Part("id_posko") id_posko: RequestBody,
-        @Part foto : MultipartBody.Part,
+        @Part("posko_penerima") id_posko: RequestBody,
         @Part("tanggal") tanggal: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part("satuan") satuan: RequestBody,
+        @Part foto : MultipartBody.Part,
     ) : Call<WrappedResponse<LogistikMasuk>>
 
     @Multipart
@@ -232,9 +234,11 @@ interface PengaduanAPIService {
         @Part("keterangan") keterangan: RequestBody,
         @Part("jumlah") jumlah: RequestBody,
         @Part("pengirim") pengirim : RequestBody,
-        @Part("id_posko") id_posko: RequestBody,
-        @Part foto : MultipartBody.Part,
+        @Part("posko_penerima") id_posko: RequestBody,
         @Part("tanggal") tanggal: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part("satuan") satuan: RequestBody,
+        @Part foto : MultipartBody.Part,
         @Part("_method") method : RequestBody
     ) : Call<WrappedResponse<LogistikMasuk>>
 
@@ -247,8 +251,10 @@ interface PengaduanAPIService {
         @Part("keterangan") keterangan: RequestBody,
         @Part("jumlah") jumlah: RequestBody,
         @Part("pengirim") pengirim : RequestBody,
-        @Part("id_posko") id_posko: RequestBody,
+        @Part("posko_penerima") id_posko: RequestBody,
         @Part("tanggal") tanggal: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part("satuan") satuan: RequestBody,
         @Part("_method") method : RequestBody
     ) : Call<WrappedResponse<LogistikMasuk>>
 

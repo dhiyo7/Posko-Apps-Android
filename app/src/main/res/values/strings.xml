@@ -136,4 +136,12 @@
         <item>Proses</item>
         <item>Terima</item>
     </string-array>
+
+    <string-array name="posko_penerima_pengirim">
+        <item>posko Induk Brebes</item>
+        <item>posko aju 1 Bumiayu</item>
+        <item>posko aju 2 Sirampog</item>
+        <item>posko aju 3 Bantarkawung</item>
+        <item>posko aju 4 Kersana</item>
+    </string-array>
 </resources>
