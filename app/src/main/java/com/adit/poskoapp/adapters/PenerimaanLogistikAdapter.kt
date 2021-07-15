@@ -1,5 +1,6 @@
 package com.adit.poskoapp.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -19,13 +20,6 @@ class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<Pene
             itemView.tvJumlah.text = data_penerimaan_logistik.jumlah.toString()
             itemView.tvKeterangan.text = data_penerimaan_logistik.keterangan
             itemView.tvTanggal.text = data_penerimaan_logistik.tanggal
-            itemView.btnEdit.setOnClickListener {
-                val intent = Intent(context, CreateOrUpdatePenerimaanActivity::class.java).apply {
-                    putExtra("IS_NEW", false)
-                    putExtra("PENERIMAAN", data_penerimaan_logistik)
-                }
-                context.startActivity(intent)
-            }
 
             val token = PoskoUtils.getToken(context)
             if(token == null || token.equals("UNDEFINED")){
@@ -46,6 +40,10 @@ class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<Pene
         holder.itemView.btnHapus.setOnClickListener { 
             listener.deleteData(data_penerimaan_logistik[position])
         }
+
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(data_penerimaan_logistik[position])
+        }
     }
 
     override fun getItemCount() = data_penerimaan_logistik.size
@@ -53,5 +51,6 @@ class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<Pene
 }
 
 interface onClickAdapterPenerimaan{
+    fun edit(data_penerimaan_logistik: PenerimaanLogistik)
     fun deleteData(data_penerimaan_logistik: PenerimaanLogistik)
 }

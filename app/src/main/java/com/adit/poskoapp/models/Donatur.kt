@@ -12,5 +12,6 @@ data class Donatur(
     @SerializedName("keterangan") var keterangan: String,
     @SerializedName("alamat") var alamat : String,
     @SerializedName("id_posko") var id_posko : String,
+    @SerializedName("posko_penerima") var posko_penerima : String,
     @SerializedName("tanggal") var tanggal : String
 ) : Parcelable

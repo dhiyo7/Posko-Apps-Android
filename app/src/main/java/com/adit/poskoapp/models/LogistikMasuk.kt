@@ -12,7 +12,10 @@ data class LogistikMasuk(
     @SerializedName("jumlah") var jumlah : String? = null,
     @SerializedName("pengirim") var pengirim : String? = null,
     @SerializedName("id_posko") var id_posko : String? = null,
+    @SerializedName("posko_penerima") var posko_penerima : String? = null,
+    @SerializedName("status") var status : String? = null,
     @SerializedName("tanggal") var tanggal : String? = null,
+    @SerializedName("foto") var foto : String? = null,
     @SerializedName("created_at") var created_at : String? = null,
     @SerializedName("updated_at") var updated_at : String? = null,
 ) : Parcelable

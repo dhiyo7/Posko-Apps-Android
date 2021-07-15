@@ -1,11 +1,13 @@
 package com.adit.poskoapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adit.poskoapp.adapters.LogistikMasukAdapter
+import com.adit.poskoapp.adapters.onClickAdapterLogistikMasuk
 import com.adit.poskoapp.contracts.LogistikMasukActivityContract
 import com.adit.poskoapp.databinding.ActivityLogistikMasukBinding
 import com.adit.poskoapp.models.LogistikMasuk
@@ -25,6 +27,14 @@ class LogistikMasukActivity : AppCompatActivity(), LogistikMasukActivityContract
         setSupportActionBar(findViewById(R.id.toolbarLogistikMasuk))
         binding.toolbarLayoutLogistikMasuk.title = "Logistik Masuk"
         setContentView(binding.root)
+
+        binding.fab.setOnClickListener {
+            startActivity(Intent(this@LogistikMasukActivity, CreateOrUpdateLogistikMasukActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            }).also{
+                finish()
+            }
+        }
     }
 
     override fun showToast(message: String) {
@@ -32,7 +42,22 @@ class LogistikMasukActivity : AppCompatActivity(), LogistikMasukActivityContract
     }
 
     override fun attachLogistikMasukRecycler(logistik_masuk: List<LogistikMasuk>) {
-        logistikMasukAdapter = LogistikMasukAdapter(logistik_masuk, this)
+        logistikMasukAdapter = LogistikMasukAdapter(logistik_masuk, this, object : onClickAdapterLogistikMasuk{
+            override fun edit(logistik_masuk: LogistikMasuk) {
+                val intent = Intent(this@LogistikMasukActivity, CreateOrUpdateLogistikMasukActivity::class.java).apply {
+                    putExtra("IS_NEW", false)
+                    putExtra("LOGISTIK_MASUK", logistik_masuk)
+                }
+                startActivity(intent).also {
+                    finish()
+                }
+            }
+
+            override fun delete(logistik_masuk: LogistikMasuk) {
+                delete(logistik_masuk.id!!.toInt())
+            }
+
+        })
         rvLogistikMasuk.apply {
             layoutManager = LinearLayoutManager(this@LogistikMasukActivity)
             adapter = logistikMasukAdapter
@@ -64,6 +89,11 @@ class LogistikMasukActivity : AppCompatActivity(), LogistikMasukActivityContract
         binding.emptyDataLogistikMasuk.apply {
             visibility = View.GONE
         }
+    }
+
+    private fun delete(id : Int){
+        val token = PoskoUtils.getToken(this)
+        presenter?.delete(token!!, id)
     }
 
     private fun getLogistikMasuk(){

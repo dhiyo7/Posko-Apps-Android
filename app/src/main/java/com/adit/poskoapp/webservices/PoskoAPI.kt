@@ -174,6 +174,7 @@ interface PengaduanAPIService {
         @Field("jenis_kebutuhan") jenis_kebutuhan : String,
         @Field("keterangan") keterangan : String,
         @Field("jumlah") jumlah : String,
+        @Field("satuan") satuan : String,
         @Field("status") status : String,
         @Field("tanggal") tanggal : String,
     ) : Call<WrappedResponse<PenerimaanLogistik>>
@@ -187,6 +188,7 @@ interface PengaduanAPIService {
         @Field("jenis_kebutuhan") jenis_kebutuhan : String,
         @Field("keterangan") keterangan : String,
         @Field("jumlah") jumlah : String,
+        @Field("satuan") satuan : String,
         @Field("status") status : String,
         @Field("tanggal") tanggal : String,
     ) : Call<WrappedResponse<PenerimaanLogistik>>
@@ -199,6 +201,54 @@ interface PengaduanAPIService {
 
     @GET("api/logistik-masuk")
     fun getLogistikMasuk(@Header("Authorization") token: String?) : Call<WrappedListResponse<LogistikMasuk>>
+
+    @Multipart
+    @POST("api/logistik-masuk")
+    fun postLogistikMasuk(
+        @Header("Authorization") token: String,
+        @Part("jenis_kebutuhan") jenis_kebutuhan: RequestBody,
+        @Part("keterangan") keterangan: RequestBody,
+        @Part("jumlah") jumlah: RequestBody,
+        @Part("pengirim") pengirim : RequestBody,
+        @Part("id_posko") id_posko: RequestBody,
+        @Part foto : MultipartBody.Part,
+        @Part("tanggal") tanggal: RequestBody,
+    ) : Call<WrappedResponse<LogistikMasuk>>
+
+    @Multipart
+    @POST("api/logistik-masuk/{id}")
+    fun putLogistikMasuk(
+        @Header("Authorization") token: String,
+        @Path("id") id : Int,
+        @Part("jenis_kebutuhan") jenis_kebutuhan: RequestBody,
+        @Part("keterangan") keterangan: RequestBody,
+        @Part("jumlah") jumlah: RequestBody,
+        @Part("pengirim") pengirim : RequestBody,
+        @Part("id_posko") id_posko: RequestBody,
+        @Part foto : MultipartBody.Part,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("_method") method : RequestBody
+    ) : Call<WrappedResponse<LogistikMasuk>>
+
+    @Multipart
+    @POST("api/logistik-masuk/{id}")
+    fun putLogistikMasukTanpaFoto(
+        @Header("Authorization") token: String,
+        @Path("id") id : Int,
+        @Part("jenis_kebutuhan") jenis_kebutuhan: RequestBody,
+        @Part("keterangan") keterangan: RequestBody,
+        @Part("jumlah") jumlah: RequestBody,
+        @Part("pengirim") pengirim : RequestBody,
+        @Part("id_posko") id_posko: RequestBody,
+        @Part("tanggal") tanggal: RequestBody,
+        @Part("_method") method : RequestBody
+    ) : Call<WrappedResponse<LogistikMasuk>>
+
+    @DELETE("api/logistik-masuk/{id}")
+    fun deleteLogistikMasuk(
+        @Header("Authorization") token : String,
+        @Path("id") id : Int,
+    ) : Call<WrappedResponse<LogistikMasuk>>
 
     @GET("api/petugas-posko")
     fun getPetugasPosko(@Header("Authorization") token: String?) : Call<WrappedListResponse<Petugas>>
@@ -270,6 +320,8 @@ interface PengaduanAPIService {
         @Header("Authorization") token: String?,
         @Path("id") id : String,
     ) : Call<WrappedResponse<KebutuhanLogistik>>
+
+
 }
 
 

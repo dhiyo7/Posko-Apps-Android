@@ -18,14 +18,6 @@ class KebutuhanLogistikAdapter(private var kebutuhan_logistik : List<KebutuhanLo
             itemView.tvKeterangan.text = kebutuhan_logistik.keterangan
             itemView.tvJumlah.text = kebutuhan_logistik.jumlah.toString()
             itemView.tvJenisKebutuhan.text = kebutuhan_logistik.jenis_kebutuhan
-            itemView.btnEdit.setOnClickListener {
-                val intent = Intent(context, CreateOrUpdateKebutuhanActivity::class.java).apply {
-                    putExtra("IS_NEW", false)
-                    putExtra("KEBUTUHAN", kebutuhan_logistik)
-                }
-
-                context.startActivity(intent)
-            }
         }
     }
 
@@ -41,11 +33,16 @@ class KebutuhanLogistikAdapter(private var kebutuhan_logistik : List<KebutuhanLo
         holder.itemView.btnHapus.setOnClickListener {
             listener.deleteData(kebutuhan_logistik[position])
         }
+
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(kebutuhan_logistik[position])
+        }
     }
 
     override fun getItemCount() = kebutuhan_logistik.size
 }
 
 interface onCLickAdapterKebutuhan{
+    fun edit(kebutuhan_logistik: KebutuhanLogistik)
     fun deleteData(kebutuhan_logistik: KebutuhanLogistik)
 }
