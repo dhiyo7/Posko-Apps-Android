@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
-        <activity android:name=".CreateOrUpdateKebutuhanActivity"></activity>
+        <activity
+            android:name=".LogistikKeluarActivity"
+            android:theme="@style/Theme.PoskoApp.NoActionBar" ></activity>
+        <activity android:name=".CreateOrUpdateKebutuhanActivity" />
         <activity android:name=".KebutuhanLogistikActivity" />
         <activity android:name=".CreateOrUpdateDonaturActivity" />
         <activity android:name=".CreateOrUpdateLogistikMasukActivity" />

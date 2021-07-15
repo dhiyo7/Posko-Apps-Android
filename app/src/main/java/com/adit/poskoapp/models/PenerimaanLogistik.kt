@@ -13,5 +13,6 @@ data class PenerimaanLogistik (
     @SerializedName("jumlah") var jumlah : Int,
     @SerializedName("satuan") var satuan : String,
     @SerializedName("tanggal") var tanggal : String,
-    @SerializedName("status") var status : String
+    @SerializedName("status") var status : String,
+    @SerializedName("foto") var foto : String,
 ) : Parcelable

@@ -31,8 +31,9 @@ interface PenerimaanLogisitkContract {
     }
 
     interface CreateOrUpdateInteraction{
-        fun create(token: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, satuan: String, status: String, tanggal : String)
-        fun update(token: String, id: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, satuan: String, status: String, tanggal : String)
+        fun create(token: String, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part)
+        fun update(token: String, id: Int, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part, method: RequestBody)
+        fun updateTanpaFoto(token: String, id: Int, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, method: RequestBody)
         fun getPosko()
         fun destroy()
     }

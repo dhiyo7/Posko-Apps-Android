@@ -21,7 +21,7 @@ class DistribusiActivity : AppCompatActivity() {
         }
 
         binding.logistikKeluar.setOnClickListener {
-            Toast.makeText(this@DistribusiActivity, "Under Development", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this@DistribusiActivity, LogistikKeluarActivity::class.java))
         }
     }
 }

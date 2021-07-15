@@ -108,7 +108,7 @@
                 <Button
                     android:id="@+id/btnEdit"
                     android:layout_width="65dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
@@ -118,8 +118,8 @@
 
                 <Button
                     android:id="@+id/btnHapus"
-                    android:layout_width="66dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="65dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
@@ -130,7 +130,7 @@
                 <Button
                     android:id="@+id/btnKebutuhanLogistik"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="2dp"
@@ -140,8 +140,8 @@
 
                 <Button
                     android:id="@+id/btnMaps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:text="Cek Lokasi"
                     android:textSize="8sp"
                     android:layout_weight="1"

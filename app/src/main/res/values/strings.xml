@@ -123,4 +123,17 @@
         <item>kodi</item>
         <item>pak</item>
     </string-array>
+
+    <string-array name="jenis_kebutuhan_array">
+        <item>sandang</item>
+        <item>pangan</item>
+        <item>obat obatan</item>
+        <item>paket kematian</item>
+        <item>logistik lainya</item>
+    </string-array>
+
+    <string-array name="status_proses_terima">
+        <item>Proses</item>
+        <item>Terima</item>
+    </string-array>
 </resources>

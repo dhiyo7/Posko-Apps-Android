@@ -42,16 +42,6 @@ interface PengaduanAPIService {
         @Field("password") password: String? = null
     ): Call<WrappedResponse<User>>
 
-    @FormUrlEncoded
-    @POST("api/register")
-    fun register(
-        @Field("name") name: String? = null,
-        @Field("email") email: String? = null,
-        @Field("password") password: String? = null,
-        @Field("confirm_password") confirm_password: String? = null
-    ): Call<WrappedResponse<User>>
-
-
     /*API Untuk CRUD Bencana*/
     @GET("api/bencana")
     fun getBencana(): Call<WrappedListResponse<Bencana>>
@@ -166,31 +156,49 @@ interface PengaduanAPIService {
     @GET("api/penerimaan-logistik")
     fun getPenerimaanLogistik() : Call<WrappedListResponse<PenerimaanLogistik>>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("api/penerimaan-logistik")
     fun postPenerimaanLogistik(
         @Header("Authorization") token: String?,
-        @Field("id_posko") id_posko : String,
-        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
-        @Field("keterangan") keterangan : String,
-        @Field("jumlah") jumlah : String,
-        @Field("satuan") satuan : String,
-        @Field("status") status : String,
-        @Field("tanggal") tanggal : String,
+        @Part("id_posko") id_posko : RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part foto : MultipartBody.Part
     ) : Call<WrappedResponse<PenerimaanLogistik>>
 
-    @FormUrlEncoded
-    @PUT("api/penerimaan-logistik/{id}")
+    @Multipart
+    @POST("api/penerimaan-logistik/{id}")
     fun putPenerimaanLogistik(
         @Header("Authorization") token: String?,
-        @Path("id") id : String,
-        @Field("id_posko") id_posko : String,
-        @Field("jenis_kebutuhan") jenis_kebutuhan : String,
-        @Field("keterangan") keterangan : String,
-        @Field("jumlah") jumlah : String,
-        @Field("satuan") satuan : String,
-        @Field("status") status : String,
-        @Field("tanggal") tanggal : String,
+        @Path("id") id : Int,
+        @Part("id_posko") id_posko : RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part foto : MultipartBody.Part,
+        @Part("_method") method : RequestBody,
+    ) : Call<WrappedResponse<PenerimaanLogistik>>
+
+    @Multipart
+    @POST("api/penerimaan-logistik/{id}")
+    fun putPenerimaanLogistikTanpaFoto(
+        @Header("Authorization") token: String?,
+        @Path("id") id : Int,
+        @Part("id_posko") id_posko : RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part("_method") method : RequestBody,
     ) : Call<WrappedResponse<PenerimaanLogistik>>
 
     @DELETE("api/penerimaan-logistik/{id}")
@@ -249,6 +257,9 @@ interface PengaduanAPIService {
         @Header("Authorization") token : String,
         @Path("id") id : Int,
     ) : Call<WrappedResponse<LogistikMasuk>>
+
+    @GET("api/logistik-keluar")
+    fun getLogistikKeluar(@Header("Authorization") token: String?) : Call<WrappedListResponse<LogistikKeluar>>
 
     @GET("api/petugas-posko")
     fun getPetugasPosko(@Header("Authorization") token: String?) : Call<WrappedListResponse<Petugas>>
