@@ -55,6 +55,16 @@ class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActi
 
     override fun attachDonaturRecycler(data_donatur: List<Donatur>) {
         donaturAdapter = DonaturAdapter(data_donatur, this, object : onClickAdapterDonatur{
+            override fun edit(data_donatur: Donatur) {
+                val intent = Intent(this@DonaturActivity, CreateOrUpdateDonaturActivity::class.java).apply {
+                    putExtra("IS_NEW", false)
+                    putExtra("DONATUR", data_donatur)
+                }
+                startActivity(intent).also{
+                    finish()
+                }
+            }
+
             override fun deleteData(data_donatur: Donatur) {
                 delete(data_donatur.id.toString())
             }

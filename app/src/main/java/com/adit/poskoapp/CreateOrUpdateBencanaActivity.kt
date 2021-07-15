@@ -25,8 +25,8 @@ import java.io.File
 class CreateOrUpdateBencanaActivity : AppCompatActivity(), BencanaActivityContract.ViewCreate {
 
     private lateinit var binding : ActivityCreateOrUpdateBencanaBinding
-    private var choosedImage: Image? = null
     private var presenter : BencanaActivityContract.InteractionPost? = null
+    private var choosedImage: Image? = null
     private var image : MultipartBody.Part? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

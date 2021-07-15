@@ -22,10 +22,11 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
         jenis_kebutuhan: String,
         keterangan: String,
         jumlah: String,
+        satuan: String,
         status: String,
         tanggal: String
     ) {
-        val request = api.postPenerimaanLogistik(token, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+        val request = api.postPenerimaanLogistik(token, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal)
         request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<PenerimaanLogistik>>,
@@ -57,10 +58,11 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
         jenis_kebutuhan: String,
         keterangan: String,
         jumlah: String,
+        satuan: String,
         status: String,
         tanggal: String
     ) {
-        val request = api.putPenerimaanLogistik(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+        val request = api.putPenerimaanLogistik(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal)
         request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<PenerimaanLogistik>>,

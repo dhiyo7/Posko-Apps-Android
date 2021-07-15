@@ -9,7 +9,7 @@ import com.adit.poskoapp.R
 import com.adit.poskoapp.models.LogistikMasuk
 import kotlinx.android.synthetic.main.list_item_logistik_masuk.view.*
 
-class LogistikMasukAdapter(private var logistik_masuk : List<LogistikMasuk>, private var context: Context) : RecyclerView.Adapter<LogistikMasukAdapter.MyHolder>() {
+class LogistikMasukAdapter(private var logistik_masuk : List<LogistikMasuk>, private var context: Context, private var listener : onClickAdapterLogistikMasuk) : RecyclerView.Adapter<LogistikMasukAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(logistik_masuk : LogistikMasuk, context: Context){
             itemView.tvPengirim.text = logistik_masuk.pengirim
@@ -26,7 +26,21 @@ class LogistikMasukAdapter(private var logistik_masuk : List<LogistikMasuk>, pri
         return MyHolder(LayoutInflater.from(context).inflate(R.layout.list_item_logistik_masuk, parent, false))
     }
 
-    override fun onBindViewHolder(holder: MyHolder, position: Int) = holder.bind(logistik_masuk[position], context)
+    override fun onBindViewHolder(holder: MyHolder, position: Int) {
+        holder.bind(logistik_masuk[position], context)
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(logistik_masuk[position])
+        }
+
+        holder.itemView.btnHapus.setOnClickListener {
+            listener.delete(logistik_masuk[position])
+        }
+    }
 
     override fun getItemCount() = logistik_masuk.size
+}
+
+interface onClickAdapterLogistikMasuk{
+    fun edit(logistik_masuk: LogistikMasuk)
+    fun delete(logistik_masuk: LogistikMasuk)
 }

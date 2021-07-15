@@ -19,13 +19,7 @@ class PetugasAdapter(private var petugas: List<Petugas>, private var context: Co
             itemView.tvNama.text = petugas.nama
             itemView.tvUsername.text = petugas.username
             itemView.tvLevel.text = petugas.level
-            itemView.btnEdit.setOnClickListener {
-                val intent = Intent(context, CreateAndUpdatePetugasActivity::class.java).apply {
-                    putExtra("IS_NEW", false)
-                    putExtra("PETUGAS", petugas)
-                }
-                context.startActivity(intent)
-            }
+
         }
     }
 
@@ -38,11 +32,16 @@ class PetugasAdapter(private var petugas: List<Petugas>, private var context: Co
         holder.itemView.btnHapus.setOnClickListener {
             onClickAdapter.showDialog(petugas[position])
         }
+
+        holder.itemView.btnEdit.setOnClickListener {
+            onClickAdapter.edit(petugas[position])
+        }
     }
 
     override fun getItemCount() = petugas.size
 }
 
 interface onClickAdapter{
+    fun edit(petugas: Petugas)
     fun showDialog(petugas: Petugas)
 }

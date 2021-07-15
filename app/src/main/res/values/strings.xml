@@ -108,4 +108,19 @@
         <item>Admin</item>
         <item>Petugas</item>
     </string-array>
+
+    <string-array name="satuan_array">
+        <item>kg</item>
+        <item>liter</item>
+        <item>dus</item>
+        <item>unit</item>
+        <item>buah</item>
+        <item>ram</item>
+        <item>lembar</item>
+        <item>pasang</item>
+        <item>bungkus</item>
+        <item>karung</item>
+        <item>kodi</item>
+        <item>pak</item>
+    </string-array>
 </resources>

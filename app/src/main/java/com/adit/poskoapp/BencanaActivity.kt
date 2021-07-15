@@ -59,6 +59,16 @@ class BencanaActivity : AppCompatActivity(), BencanaActivityContract.View {
         rvBencana.apply {
             layoutManager = LinearLayoutManager(this@BencanaActivity)
             adapter = BencanaAdapter(bencana, this@BencanaActivity,object : onClickAdapterBencana{
+                override fun edit(data: Bencana) {
+                    val intent = Intent(this@BencanaActivity, CreateOrUpdateBencanaActivity::class.java).apply {
+                        putExtra("IS_NEW", false)
+                        putExtra("BENCANA", data)
+                    }
+                    startActivity(intent).also {
+                        finish()
+                    }
+                }
+
                 override fun deleteData(data: Bencana) {
                     delete(data!!.id.toString())
                 }

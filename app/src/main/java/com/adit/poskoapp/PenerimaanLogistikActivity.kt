@@ -53,6 +53,17 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
 
     override fun attachPenerimaanLogistikRecycler(data_penerimaan_logistik: List<PenerimaanLogistik>) {
         penerimaanLogisitikAdapter = PenerimaanLogistikAdapter(data_penerimaan_logistik,this, object: onClickAdapterPenerimaan{
+            override fun edit(data_penerimaan_logistik: PenerimaanLogistik) {
+                val intent = Intent(this@PenerimaanLogistikActivity, CreateOrUpdatePenerimaanActivity::class.java).apply {
+                    putExtra("IS_NEW", false)
+                    putExtra("PENERIMAAN", data_penerimaan_logistik)
+                }
+
+                startActivity(intent).also {
+                    finish()
+                }
+            }
+
             override fun deleteData(data_penerimaan_logistik: PenerimaanLogistik) {
                 deleteData(data_penerimaan_logistik!!.id.toString())
             }

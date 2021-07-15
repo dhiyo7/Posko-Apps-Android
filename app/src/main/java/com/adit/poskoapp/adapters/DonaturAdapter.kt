@@ -22,18 +22,11 @@ class DonaturAdapter(private var data_donatur : List<Donatur>, private var conte
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data_donatur: Donatur, context: Context){
             itemView.tvNama.text = data_donatur.nama
-            itemView.tvPoskoPenerima.text = data_donatur.id_posko
+            itemView.tvPoskoPenerima.text = data_donatur.posko_penerima
             itemView.tvJenisKebutuhan.text = data_donatur.jenis_kebutuhan
             itemView.tvKeterangan.text = data_donatur.keterangan
             itemView.tvAlamat.text = data_donatur.alamat
             itemView.tvTanggal.text = data_donatur.tanggal
-            itemView.btnEdit.setOnClickListener {
-                val intent = Intent(context, CreateOrUpdateDonaturActivity::class.java).apply {
-                    putExtra("IS_NEW", false)
-                    putExtra("DONATUR", data_donatur)
-                }
-                context.startActivity(intent)
-            }
 
             val token = PoskoUtils.getToken(context)
             if(token == null || token.equals("UNDEFINED")){
@@ -53,12 +46,16 @@ class DonaturAdapter(private var data_donatur : List<Donatur>, private var conte
         holder.itemView.btnHapus.setOnClickListener {
             listener.deleteData(data_donatur[position])
         }
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(data_donatur[position])
+        }
     }
 
     override fun getItemCount(): Int = data_donatur.size
 }
 
 interface onClickAdapterDonatur{
+    fun edit(data_donatur: Donatur)
     fun deleteData(data_donatur: Donatur)
 }
 

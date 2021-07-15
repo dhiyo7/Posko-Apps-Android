@@ -28,6 +28,7 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
         binding = ActivityCreateOrUpdatePenerimaanBinding.inflate(layoutInflater)
         setContentView(binding.root)
         doSave()
+        setupSpinnerLevel()
         fill()
     }
 
@@ -70,6 +71,14 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
             binding.etJenis.setText(getPenerimaan()?.jenis_kebutuhan)
             binding.etKeterangan.setText(getPenerimaan()?.keterangan)
             binding.etJumlah.setText(getPenerimaan()?.jumlah.toString())
+
+            val satuanSelected = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(com.adit.poskoapp.R.array.satuan_array))
+            var positionSatuan = satuanSelected.getPosition(getPenerimaan()?.satuan)
+            binding.satuan.apply {
+                adapter = satuanSelected
+                setSelection(positionSatuan)
+
+            }
         }
     }
 
@@ -89,6 +98,7 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
 
     private fun doSave(){
         binding.btnSubmit.setOnClickListener {
+            showLoading()
             val token = PoskoUtils.getToken(this)
             var objectPosko = binding.poskopenerima.selectedItem as Posko
             var id_posko = objectPosko.id
@@ -97,15 +107,22 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
             var keterangan = binding.etKeterangan.text.toString()
             var jumlah = binding.etJumlah.text.toString()
             var status = "Proses"
+            var satuan = binding.satuan.selectedItem
             var tanggal = binding.etDate.text.toString()
 
             if(isNew()){
-                presenter?.create(token!!,id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+                presenter?.create(token!!,id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, satuan.toString(), status, tanggal)
             }else{
-                presenter?.update(token!!, getPenerimaan()?.id.toString(), id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+                presenter?.update(token!!, getPenerimaan()?.id.toString(), id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, satuan.toString(), status, tanggal)
             }
         }
 
+    }
+
+    private fun setupSpinnerLevel() {
+        val spinnerLevelAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
+            com.adit.poskoapp.R.array.satuan_array))
+        binding.satuan.adapter = spinnerLevelAdapter
     }
 
     private fun getPosko(){

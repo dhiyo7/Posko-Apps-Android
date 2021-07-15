@@ -44,6 +44,16 @@ class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActi
     override fun attachPetugasRecycler(petugas: List<Petugas>) {
         binding.rvPetugas.apply {
             adapterPetugas = PetugasAdapter(petugas, this@PetugasActivity, object: onClickAdapter{
+                override fun edit(petugas: Petugas) {
+                    val intent = Intent(this@PetugasActivity, CreateAndUpdatePetugasActivity::class.java).apply {
+                        putExtra("IS_NEW", false)
+                        putExtra("PETUGAS", petugas)
+                    }
+                    startActivity(intent).also{
+                        finish()
+                    }
+                }
+
                 override fun showDialog(petugas: Petugas) {
                     delete(petugas!!.id.toString())
                 }

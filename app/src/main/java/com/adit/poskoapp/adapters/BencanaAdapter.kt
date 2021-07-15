@@ -26,6 +26,9 @@ class BencanaAdapter(private var data: List<Bencana>, private var context: Conte
         holder.itemView.btnHapus.setOnClickListener {
             listener.deleteData(data[position])
         }
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(data[position])
+        }
     }
 
     override fun getItemCount() = data.size
@@ -37,18 +40,13 @@ class BencanaAdapter(private var data: List<Bencana>, private var context: Conte
             itemView.tvTanggal.text = bencana.date
             itemView.tvDetail.text = bencana.detail
             itemView.ivFoto.load(bencana.foto)
-            itemView.btnEdit.setOnClickListener{
-                val intent = Intent(context, CreateOrUpdateBencanaActivity::class.java).apply {
-                    putExtra("IS_NEW", false)
-                    putExtra("BENCANA", bencana)
-                }
-                context.startActivity(intent)
-            }
+
         }
 
     }
 }
 
 interface onClickAdapterBencana{
+    fun edit(data: Bencana)
     fun deleteData(data: Bencana)
 }

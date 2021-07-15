@@ -42,6 +42,17 @@ class KebutuhanLogistikActivity : AppCompatActivity(), KebutuhanLogistikActivity
 
     override fun attachKebutuhanLogistikRecycler(kebutuhan_logistik: List<KebutuhanLogistik>) {
         kebutuhanAdapter = KebutuhanLogistikAdapter(kebutuhan_logistik , this, object : onCLickAdapterKebutuhan{
+            override fun edit(kebutuhan_logistik: KebutuhanLogistik) {
+                val intent = Intent(this@KebutuhanLogistikActivity, CreateOrUpdateKebutuhanActivity::class.java).apply {
+                    putExtra("IS_NEW", false)
+                    putExtra("KEBUTUHAN", kebutuhan_logistik)
+                }
+
+                startActivity(intent).also {
+                    finish()
+                }
+            }
+
             override fun deleteData(kebutuhan_logistik: KebutuhanLogistik) {
                 deleteData(kebutuhan_logistik.id.toString())
             }
