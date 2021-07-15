@@ -33,7 +33,7 @@ class BencanaActivity : AppCompatActivity(), BencanaActivityContract.View {
 
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        binding.toolbarLayout.title = "Daftar Bencana"
+        binding.toolbarLayout.title = "Info Bencana"
         binding.fab.setOnClickListener { view ->
             startActivity(Intent(this@BencanaActivity, CreateOrUpdateBencanaActivity::class.java).apply {
                 putExtra("IS_NEW", true)

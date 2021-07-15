@@ -65,15 +65,21 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Jenis Kebutuhan"
+                android:textSize="14sp" />
+
             <RelativeLayout
-                android:id="@+id/posko"
+                android:id="@+id/jenis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="13dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/spinner_background">
 
                 <Spinner
-                    android:id="@+id/poskopenerima"
+                    android:id="@+id/spinnerJenis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp" />
@@ -85,14 +91,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Jenis Kebutuhan"
+                android:hint="Posko Penerima"
                 app:boxStrokeColor="@color/design_default_color_primary"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
                 tools:layout_editor_absoluteX="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJenis"
+                    android:id="@+id/etPoskoPenerima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"

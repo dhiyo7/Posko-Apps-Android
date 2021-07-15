@@ -27,6 +27,7 @@ class CreateOrUpdateDonaturActivity : AppCompatActivity(), DonaturActivityContra
         setContentView(binding.root)
         doSave()
         fill()
+        setupSpinner()
     }
 
     override fun showToast(message: String?) {
@@ -55,34 +56,29 @@ class CreateOrUpdateDonaturActivity : AppCompatActivity(), DonaturActivityContra
         startActivity(intent)
     }
 
-    override fun attachToSpinner(posko: List<Posko>) {
-        var spinnerAdapterPosko = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, posko)
-        binding.poskopenerima.apply {
-            adapter = spinnerAdapterPosko
-        }
-    }
-
     private fun isNew() : Boolean = intent.getBooleanExtra("IS_NEW", true)
 
     private fun getDonatur() : Donatur? = intent.getParcelableExtra("DONATUR")
 
-    override fun setSelectionSpinner(posko: List<Posko>) {
+    private fun fill(){
         if(!isNew()){
-            for(item in posko.indices){
-                if(posko[item].id == getDonatur()?.id_posko!!.toInt()){
-                    binding.poskopenerima.setSelection(item)
-                }
-            }
+            binding.etNama.setText(getDonatur()?.nama)
+            binding.etPoskoPenerima.setText(getDonatur()?.posko_penerima)
+            binding.etKeterangan.setText(getDonatur()?.keterangan)
+            binding.etAlamat.setText(getDonatur()?.alamat)
+            binding.etDate.setText(getDonatur()?.tanggal)
         }
     }
 
-    private fun fill(){
+    private fun setupSpinner(){
+        val spinnerJenisAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
+            com.adit.poskoapp.R.array.jenis_kebutuhan_array
+        ))
+        binding.spinnerJenis.adapter = spinnerJenisAdapter
+
         if(!isNew()){
-            binding.etAlamat.setText(getDonatur()?.alamat)
-            binding.etDate.setText(getDonatur()?.tanggal)
-            binding.etJenis.setText(getDonatur()?.jenis_kebutuhan)
-            binding.etKeterangan.setText(getDonatur()?.keterangan)
-            binding.etNama.setText(getDonatur()?.nama)
+            val selectedJenisKebutuhan = spinnerJenisAdapter.getPosition(getDonatur()?.jenis_kebutuhan)
+            binding.spinnerJenis.setSelection(selectedJenisKebutuhan)
         }
     }
 
@@ -90,29 +86,18 @@ class CreateOrUpdateDonaturActivity : AppCompatActivity(), DonaturActivityContra
         binding.btnSubmit.setOnClickListener {
             val token = PoskoUtils.getToken(this)
             var nama = binding.etNama.text.toString()
-            var objectPosko = binding.poskopenerima.selectedItem as Posko
-            var id_posko = objectPosko.id
-            var jenis = binding.etJenis.text.toString()
+            var jenis = binding.spinnerJenis.selectedItem.toString()
+            var posko_penerima = binding.etPoskoPenerima.text.toString()
             var keterangan = binding.etKeterangan.text.toString()
             var alamat = binding.etAlamat.text.toString()
             var date = binding.etDate.text.toString()
 
             if (isNew()){
-                presenter?.create(token!!, nama, id_posko.toString(), jenis, keterangan, alamat, date)
+                presenter?.create(token!!, nama, posko_penerima, jenis, keterangan,alamat, date)
             }else{
-                presenter?.update(token!!, getDonatur()?.id.toString(), nama, id_posko.toString(), jenis, keterangan, alamat, date)
+                presenter?.update(token!!, getDonatur()?.id.toString(), nama, posko_penerima, jenis, keterangan,alamat, date)
             }
-
         }
-    }
-
-    private fun getPosko() {
-        presenter?.getPosko()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getPosko()
     }
 
     override fun onDestroy() {

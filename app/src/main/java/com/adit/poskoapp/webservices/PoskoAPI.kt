@@ -125,7 +125,7 @@ interface PengaduanAPIService {
     fun postDonatur(
         @Header("Authorization") token: String?,
         @Field("nama") nama : String,
-        @Field("id_posko") id_posko : String,
+        @Field("posko_penerima") posko_penerima : String,
         @Field("jenis_kebutuhan") jenis_kebutuhan : String,
         @Field("keterangan") keterangan : String,
         @Field("alamat") alamat : String,
@@ -138,7 +138,7 @@ interface PengaduanAPIService {
         @Header("Authorization") token: String?,
         @Path("id") id : String,
         @Field("nama") nama : String,
-        @Field("id_posko") id_posko : String,
+        @Field("posko_penerima") posko_penerima : String,
         @Field("jenis_kebutuhan") jenis_kebutuhan : String,
         @Field("keterangan") keterangan : String,
         @Field("alamat") alamat : String,

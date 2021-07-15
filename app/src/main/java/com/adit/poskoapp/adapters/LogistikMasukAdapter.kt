@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.LogistikMasuk
 import kotlinx.android.synthetic.main.list_item_logistik_masuk.view.*
@@ -20,6 +21,7 @@ class LogistikMasukAdapter(private var logistik_masuk : List<LogistikMasuk>, pri
             itemView.tvStatus.text = logistik_masuk.status
             itemView.tvTanggal.text = logistik_masuk.tanggal
             itemView.tvSatuan.text = logistik_masuk.satuan
+            itemView.ivFoto.load(logistik_masuk.foto)
         }
     }
 

@@ -28,7 +28,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Username"
             app:boxStrokeColor="@color/design_default_color_primary"
             app:errorEnabled="true">
 
@@ -58,13 +58,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/etRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="Don't have an Account?"
-            android:textAlignment="textEnd" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
