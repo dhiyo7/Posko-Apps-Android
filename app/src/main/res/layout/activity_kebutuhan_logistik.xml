@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Data Petugas Posko"
+        android:text="Kebutuhan Logistik"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -64,6 +64,8 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

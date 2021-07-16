@@ -24,14 +24,11 @@ interface DonaturActivityContract {
         fun showLoading()
         fun hideLoading()
         fun success()
-        fun attachToSpinner(posko: List<Posko>)
-        fun setSelectionSpinner(posko: List<Posko>)
     }
 
     interface CreateOrUpdateInteraction{
-        fun create(token: String, nama: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, alamat: String, tanggal : String)
-        fun update(token: String, id: String, nama: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, alamat: String, tanggal : String)
-        fun getPosko()
+        fun create(token: String, nama: String, posko_penerima: String, jenis_kebutuhan : String, keterangan : String, alamat: String, tanggal : String)
+        fun update(token: String, id: String, nama: String, posko_penerima: String, jenis_kebutuhan : String, keterangan : String, alamat: String, tanggal : String)
         fun destroy()
     }
 }

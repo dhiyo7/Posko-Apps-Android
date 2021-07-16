@@ -28,7 +28,7 @@ class DonaturActivity : AppCompatActivity(), DonaturActivityContract.DonaturActi
         binding = ActivityDonaturBinding.inflate(layoutInflater)
         presenter = DonaturActivityPresenter(this)
         setSupportActionBar(findViewById(R.id.toolbarDonatur))
-        binding.toolbarLayoutDonatur.title = "Daftar Donatur"
+        binding.toolbarLayoutDonatur.title = "Info Donatur"
         setContentView(binding.root)
 
         binding.fab.setOnClickListener { view ->

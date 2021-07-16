@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View {
         var gson = Gson()
         var json : String = gson.toJson(list)
         PoskoUtils.setToken(this, "Bearer ${token}", level)
+        PoskoUtils.setList(this, json)
         println("Token "+token)
         startActivity(Intent(this, MainActivity::class.java)).also { finish() }
     }

@@ -13,6 +13,7 @@ data class KebutuhanLogistik (
     @SerializedName("jumlah") var jumlah : Int,
     @SerializedName("tanggal") var tanggal : String,
     @SerializedName("status") var status : String,
+    @SerializedName("satuan") var satuan : String,
     @SerializedName("created_at") var created_at : String,
     @SerializedName("updated_at") var updated_at : String,
 ) : Parcelable

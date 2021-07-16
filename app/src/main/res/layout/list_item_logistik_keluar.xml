@@ -25,24 +25,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PENGIRIM : "
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/tvPengirim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="Nama Pengirim"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="POSKO PENERIMA : "
                     android:textSize="14sp"/>
                 <TextView
@@ -130,36 +112,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="STATUS : "
-                    android:textSize="14sp"/>
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:text="Diterima"/>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:text="Ubah"
                     android:layout_marginRight="5dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnHapus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
                     android:text="Hapus"
                     android:layout_marginRight="5dp"/>
             </LinearLayout>

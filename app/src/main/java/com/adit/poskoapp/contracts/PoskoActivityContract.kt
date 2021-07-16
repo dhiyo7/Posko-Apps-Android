@@ -10,43 +10,22 @@ interface PoskoActivityContract {
         fun notConnect(message: String?)
     }
 
-    interface ViewCreate {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean?)
-    }
-
-    interface ViewEdit {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean)
-    }
-
-    interface ViewDelete {
-        fun success(message: String?)
-        fun toast(message: String?)
-        fun isLoading(state: Boolean)
-    }
-
     interface Interaction {
         fun allPosko()
+        fun delete(token : String, id: String)
         fun destroy()
     }
 
-    interface InteractionPost {
-        fun validate(name: String, location: String, description: String): Boolean
-        fun save(token: String, name: String, location: String, description: String)
-        fun destroy()
+    interface CreateOrUpdateView {
+        fun showToast(message: String?)
+        fun showLoading()
+        fun hideLoading()
+        fun success()
     }
 
-    interface InteractionUpdate {
-        fun validate(name: String, location: String, description: String): Boolean
-        fun update(id: Int, token: String, name: String, location: String, description: String)
-        fun destroy()
-    }
-
-    interface InteractionDelete {
-        fun delete(id: Int, token: String)
+    interface CreateOrUpdateInteraction {
+        fun create(token: String, nama : String, jumlah_pengungsi: String, kontak_hp: String, lokasi: String, longitude : String, latitude: String)
+        fun update(token: String, id: String, nama : String, jumlah_pengungsi: String, kontak_hp: String, lokasi: String, longitude : String, latitude: String)
         fun destroy()
     }
 }

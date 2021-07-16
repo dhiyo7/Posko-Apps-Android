@@ -56,35 +56,9 @@ class LoginActivityPresenter(v: LoginActivityContract.View) : LoginActivityContr
     }
 
     override fun register(email: String, name: String, password: String, confirm_password: String) {
-        view?.isLoading(true)
-        api.register(email, name, password, confirm_password)
-            .enqueue(object : Callback<WrappedResponse<User>> {
-                override fun onResponse(
-                    call: Call<WrappedResponse<User>>,
-                    response: Response<WrappedResponse<User>>
-                ) {
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        if (body != null && body.status == 200) {
-                            view?.toast("Selamat Datang ${body.data!!.nama}")
-                            view?.success(body.data?.token!!, body.data?.level!!, body.data)
-                        } else {
-                            view?.toast("Register Gagal, cek semua form")
-                        }
-                    } else {
-                        view?.toast("Ada yang tidak beres")
-                    }
-                    view?.isLoading(false)
-                }
-
-                override fun onFailure(call: Call<WrappedResponse<User>>, t: Throwable) {
-                    view?.toast("Koneksi ke server tidak bisa")
-                    println("error " + t.message)
-                    view?.notConect()
-                }
-
-            })
+        TODO("Not yet implemented")
     }
+
 
     override fun destroy() {
         view = null

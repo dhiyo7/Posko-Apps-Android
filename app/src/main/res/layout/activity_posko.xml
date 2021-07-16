@@ -25,8 +25,9 @@
 
             <ImageView
                 android:id="@+id/iv_detail_gambar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:src="@mipmap/icon2"
                 android:scaleType="fitCenter" />
 
@@ -48,5 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

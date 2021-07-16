@@ -32,9 +32,9 @@ interface LogistikMasukActivityContract {
     }
 
     interface CreateOrUpdateInteraction{
-        fun create(token: String, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, id_posko : RequestBody, foto : MultipartBody.Part, tanggal: RequestBody)
-        fun update(token: String, id: Int, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, id_posko : RequestBody, foto : MultipartBody.Part, tanggal: RequestBody, method: RequestBody)
-        fun updateTanpaFoto(token: String, id: Int, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, id_posko : RequestBody,  tanggal: RequestBody, method: RequestBody)
+        fun create(token: String, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, tanggal: RequestBody, status: RequestBody, satuan : RequestBody, foto : MultipartBody.Part)
+        fun update(token: String, id: Int, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, tanggal: RequestBody, status: RequestBody, satuan : RequestBody, foto : MultipartBody.Part, method: RequestBody)
+        fun updateTanpaFoto(token: String, id: Int, jenis_kebutuhan: RequestBody, keterangan : RequestBody, jumlah : RequestBody, pengirim : RequestBody, tanggal: RequestBody, status: RequestBody, satuan : RequestBody, method: RequestBody)
         fun getPosko()
         fun destroy()
     }

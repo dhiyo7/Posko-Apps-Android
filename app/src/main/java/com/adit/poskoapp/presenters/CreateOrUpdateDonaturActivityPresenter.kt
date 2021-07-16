@@ -42,6 +42,7 @@ class CreateOrUpdateDonaturActivityPresenter(v: DonaturActivityContract.CreateOr
 
             override fun onFailure(call: Call<WrappedResponse<Donatur>>, t: Throwable) {
                 view?.showToast("Tidak bisa koneksi ke server")
+                view?.hideLoading()
             }
 
         })
@@ -75,35 +76,9 @@ class CreateOrUpdateDonaturActivityPresenter(v: DonaturActivityContract.CreateOr
 
             override fun onFailure(call: Call<WrappedResponse<Donatur>>, t: Throwable) {
                 view?.showToast("Tidak bisa koneksi ke server")
+                view?.hideLoading()
             }
 
-        })
-    }
-
-    override fun getPosko() {
-        val request = api.getPosko()
-        request.enqueue(object : Callback<WrappedListResponse<Posko>>{
-            override fun onResponse(
-                call: Call<WrappedListResponse<Posko>>,
-                response: Response<WrappedListResponse<Posko>>
-            ) {
-                if(response.isSuccessful){
-                    val body = response.body()
-                    if(body != null){
-                        println("POSKO " + body.data)
-                        view?.attachToSpinner(body.data)
-                        view?.setSelectionSpinner(body.data)
-
-                    }
-                }else{
-                    view?.showToast("Terjadi kesalahan")
-                }
-            }
-
-            override fun onFailure(call: Call<WrappedListResponse<Posko>>, t: Throwable) {
-                view?.showToast("Tidak bisa koneksi ke server")
-                println(t.message)
-            }
         })
     }
 

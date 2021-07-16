@@ -3,6 +3,15 @@
     package="com.adit.poskoapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +20,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
-        <activity android:name=".CreateOrUpdateKebutuhanActivity"></activity>
+        <activity android:name=".SplashScreenActivity"></activity>
+        <activity android:name=".CreateOrUpdatePoskoActivity" />
+        <activity android:name=".LocationPickerActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAUG8HaUQbpcvNASxMAv81zOUqk6a4q6tA" />
+
+        <activity android:name=".CreateOrUpdateLogistikKeluarActivity" />
+        <activity
+            android:name=".LogistikKeluarActivity"
+            android:theme="@style/Theme.PoskoApp.NoActionBar" />
+        <activity android:name=".CreateOrUpdateKebutuhanActivity" />
         <activity android:name=".KebutuhanLogistikActivity" />
         <activity android:name=".CreateOrUpdateDonaturActivity" />
         <activity android:name=".CreateOrUpdateLogistikMasukActivity" />
@@ -43,7 +64,10 @@
             android:name=".DonaturActivity"
             android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity android:name=".PetugasActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.PoskoApp.NoActionBar"
+            />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

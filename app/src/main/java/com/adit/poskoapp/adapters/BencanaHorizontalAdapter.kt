@@ -1,11 +1,13 @@
 package com.adit.poskoapp.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.adit.poskoapp.DetailBencanaActivity
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.Bencana
 import com.smarteist.autoimageslider.SliderViewAdapter
@@ -16,6 +18,13 @@ class BencanaHorizontalAdapter(private var bencana : List<Bencana>, private var 
         fun bind(bencana : Bencana, context: Context){
             itemView.tvAutoImage.text= bencana.nama
             itemView.ivImage.load(bencana.foto)
+            itemView.setOnClickListener {
+                val intent = Intent(context, DetailBencanaActivity::class.java).apply{
+                    putExtra("BENCANA", bencana)
+                }
+
+                context.startActivity(intent)
+            }
         }
     }
 

@@ -20,9 +20,10 @@ class CreateOrUpdateKebutuhanActivityPresenter(v : KebutuhanLogistikActivityCont
         keterangan: String,
         jumlah: String,
         status: String,
-        tanggal: String
+        tanggal: String,
+        satuan : String,
     ) {
-        val request = api.postKebutuhan(token, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+        val request = api.postKebutuhan(token, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal, satuan)
         request.enqueue(object : Callback<WrappedResponse<KebutuhanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<KebutuhanLogistik>>,
@@ -55,9 +56,10 @@ class CreateOrUpdateKebutuhanActivityPresenter(v : KebutuhanLogistikActivityCont
         keterangan: String,
         jumlah: String,
         status: String,
-        tanggal: String
+        tanggal: String,
+        satuan : String,
     ) {
-        val request = api.putKebutuhan(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+        val request = api.putKebutuhan(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, status, tanggal, satuan)
         request.enqueue(object : Callback<WrappedResponse<KebutuhanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<KebutuhanLogistik>>,

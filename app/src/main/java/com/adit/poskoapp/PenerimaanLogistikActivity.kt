@@ -78,9 +78,6 @@ class PenerimaanLogistikActivity : AppCompatActivity(), PenerimaanLogisitkContra
     private fun deleteData(id : String){
         val token = PoskoUtils.getToken(this)
         presenter?.delete(token!!, id)
-        startActivity(Intent(this@PenerimaanLogistikActivity, PenerimaanLogistikActivity::class.java).also{
-            finish()
-        })
     }
 
     override fun showLoading() {
