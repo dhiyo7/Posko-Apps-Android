@@ -105,7 +105,9 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnEdit"
                     android:layout_width="65dp"
                     android:layout_height="40dp"
@@ -116,7 +118,9 @@
                     android:layout_marginRight="2dp"
                     android:textSize="8sp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnHapus"
                     android:layout_width="65dp"
                     android:layout_height="40dp"
@@ -127,7 +131,9 @@
                     android:text="Hapus"
                     android:textSize="8sp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnKebutuhanLogistik"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
@@ -138,7 +144,9 @@
                     android:text="Kebutuhan Logistik"
                     android:textSize="8sp" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnMaps"
                     android:layout_width="70dp"
                     android:layout_height="40dp"

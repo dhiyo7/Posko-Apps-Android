@@ -137,6 +137,11 @@
         <item>Terima</item>
     </string-array>
 
+    <string-array name="status_terpenuhi_belum">
+        <item>Belum Terpenuhi</item>
+        <item>Terpenuhi</item>
+    </string-array>
+
     <string-array name="posko_penerima_pengirim">
         <item>posko Induk Brebes</item>
         <item>posko aju 1 Bumiayu</item>

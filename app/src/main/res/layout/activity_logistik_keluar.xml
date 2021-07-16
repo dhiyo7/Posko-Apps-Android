@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/blue"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbarLogistikKeluar">
 
@@ -33,7 +33,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_logistik_masuk"/>
+    <include layout="@layout/content_logistik_keluar"/>
 
     <ProgressBar
         android:id="@+id/loadingLogistikKeluar"
@@ -57,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

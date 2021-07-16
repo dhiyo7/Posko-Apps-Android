@@ -119,14 +119,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="20dp"
+                android:backgroundTint="@color/blue"
                 android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:textSize="12sp"
                 android:text="Ubah"
                 android:layout_marginRight="5dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                app:cornerRadius="20dp"
+                android:backgroundTint="@color/blue"
                 android:id="@+id/btnHapus"
                 android:layout_width="80dp"
                 android:layout_height="40dp"

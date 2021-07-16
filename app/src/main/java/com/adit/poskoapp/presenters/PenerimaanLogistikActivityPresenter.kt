@@ -63,6 +63,7 @@ class PenerimaanLogistikActivityPresenter(v :  PenerimaanLogisitkContract.Peneri
                     val body = response.body()
                     if (body != null){
                         view?.showToast(body.message!!)
+                        infoPenerimaanLogistik()
                     }
                 }
             }
@@ -70,6 +71,7 @@ class PenerimaanLogistikActivityPresenter(v :  PenerimaanLogisitkContract.Peneri
             override fun onFailure(call: Call<WrappedResponse<PenerimaanLogistik>>, t: Throwable) {
                 view?.showToast("Tidak bisa koneksi ke server")
                 println(t.message)
+                view?.hideLoading()
             }
 
         })

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".CreateOrUpdateLogistikMasukActivity">
+    tools:context=".CreateOrUpdateLogistikKeluarActivity">
 
     <ProgressBar
         android:id="@+id/loadingCreateOrUpdate"
@@ -46,21 +46,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Foto"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:background="#e9e9e9"
-                android:src="@drawable/add_image" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -123,24 +108,26 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inPengirim"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Posko Penerima"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:id="@+id/posko"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pengirim"
-                app:boxStrokeColor="@color/design_default_color_primary"
-                app:errorEnabled="true"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                tools:layout_editor_absoluteX="20dp">
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/spinner_background">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPengirim"
+                <Spinner
+                    android:id="@+id/spinnerPosko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_margin="3dp" />
+
+            </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inDate"

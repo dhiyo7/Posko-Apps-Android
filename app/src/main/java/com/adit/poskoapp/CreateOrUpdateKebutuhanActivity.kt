@@ -61,6 +61,32 @@ class CreateOrUpdateKebutuhanActivity : AppCompatActivity(), KebutuhanLogistikAc
         binding.poskopenerima.apply {
             adapter = spinnerAdapterPosko
         }
+
+        val spinnerJenisAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
+            com.adit.poskoapp.R.array.jenis_kebutuhan_array
+        ))
+        binding.spinnerJenis.adapter = spinnerJenisAdapter
+
+        val spinnerStatusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
+            com.adit.poskoapp.R.array.status_terpenuhi_belum
+        ))
+        binding.spinnerStatus.adapter = spinnerStatusAdapter
+
+        val spinnerSatuanAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
+            com.adit.poskoapp.R.array.satuan_array
+        ))
+        binding.spinnerSatuan.adapter = spinnerSatuanAdapter
+
+        if(!isNew()){
+            var selectedJenis = spinnerJenisAdapter.getPosition(getKebutuhan()?.jenis_kebutuhan)
+            binding.spinnerJenis.setSelection(selectedJenis)
+
+            var selectedStats = spinnerStatusAdapter.getPosition(getKebutuhan()?.status)
+            binding.spinnerStatus.setSelection(selectedStats)
+
+            var selectedSatuan = spinnerSatuanAdapter.getPosition(getKebutuhan()?.satuan)
+            binding.spinnerSatuan.setSelection(selectedSatuan)
+        }
     }
 
     override fun setSelectionSpinner(posko: List<Posko>) {
@@ -80,7 +106,6 @@ class CreateOrUpdateKebutuhanActivity : AppCompatActivity(), KebutuhanLogistikAc
     private fun fill(){
         if(!isNew()){
             binding.etDate.setText(getKebutuhan()?.tanggal)
-            binding.etJenis.setText(getKebutuhan()?.jenis_kebutuhan)
             binding.etKeterangan.setText(getKebutuhan()?.keterangan)
             binding.etJumlah.setText(getKebutuhan()?.jumlah.toString())
         }
@@ -89,19 +114,20 @@ class CreateOrUpdateKebutuhanActivity : AppCompatActivity(), KebutuhanLogistikAc
     private fun doSave(){
         binding.btnSubmit.setOnClickListener {
             val token = PoskoUtils.getToken(this)
-            var objectPosko = binding.poskopenerima.selectedItem as Posko
-            var id_posko = objectPosko.id
 
-            var jenis_kebutuhan = binding.etJenis.text.toString()
+            var objectSelected = binding.poskopenerima.selectedItem as Posko
+            var penerima = objectSelected.id
+            var jenis_kebutuhan = binding.spinnerJenis.selectedItem.toString()
             var keterangan = binding.etKeterangan.text.toString()
             var jumlah = binding.etJumlah.text.toString()
-            var status = "Belum Terpenuhi"
+            var status = binding.spinnerStatus.selectedItem.toString()
+            var satuan = binding.spinnerSatuan.selectedItem.toString()
             var tanggal = binding.etDate.text.toString()
 
             if(isNew()){
-                presenter?.create(token!!,id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+                presenter?.create(token!!,penerima!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal, satuan)
             }else{
-                presenter?.update(token!!, getKebutuhan()?.id.toString(), id_posko!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal)
+                presenter?.update(token!!, getKebutuhan()?.id.toString(), penerima!!.toString(), jenis_kebutuhan, keterangan, jumlah, status, tanggal,satuan)
             }
         }
 

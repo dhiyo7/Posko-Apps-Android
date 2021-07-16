@@ -18,6 +18,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
     private var api = PoskoAPI.instance()
     override fun create(
         token: String,
+        pengirim : RequestBody,
         id_posko: RequestBody,
         jenis_kebutuhan: RequestBody,
         keterangan: RequestBody,
@@ -27,7 +28,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
         tanggal: RequestBody,
         foto : MultipartBody.Part
     ) {
-        val request = api.postPenerimaanLogistik(token, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, foto)
+        val request = api.postPenerimaanLogistik(token, pengirim, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, foto)
         request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<PenerimaanLogistik>>,
@@ -39,7 +40,13 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
                         view?.showToast(body.message!!)
                         view?.hideLoading()
                         view?.success()
+                    }else{
+                        view?.showToast(body?.message!!)
+                        view?.hideLoading()
                     }
+                }else{
+                    view?.showToast("Terjadi kesalahan")
+                    view?.hideLoading()
                 }
             }
 
@@ -47,6 +54,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
                 view?.showToast("Tidak bisa koneksi ke server")
                 println(t.message)
                 t.printStackTrace()
+                view?.hideLoading()
             }
 
         })
@@ -55,6 +63,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
     override fun update(
         token: String,
         id: Int,
+        pengirim : RequestBody,
         id_posko: RequestBody,
         jenis_kebutuhan: RequestBody,
         keterangan: RequestBody,
@@ -65,20 +74,25 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
         foto : MultipartBody.Part,
         method : RequestBody,
     ) {
-        val request = api.putPenerimaanLogistik(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, foto, method)
+        val request = api.putPenerimaanLogistik(token, id, pengirim, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, foto, method)
         request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<PenerimaanLogistik>>,
                 response: Response<WrappedResponse<PenerimaanLogistik>>
             ) {
-                println("RESPONSE " + response)
                 if(response.isSuccessful){
                     val body = response.body()
                     if (body != null){
                         view?.showToast(body.message!!)
                         view?.hideLoading()
                         view?.success()
+                    }else{
+                        view?.showToast(body?.message!!)
+                        view?.hideLoading()
                     }
+                }else{
+                    view?.showToast("Terjadi kesalahan")
+                    view?.hideLoading()
                 }
             }
 
@@ -86,6 +100,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
                 view?.showToast("Tidak bisa koneksi ke server")
                 println(t.message)
                 t.printStackTrace()
+                view?.hideLoading()
             }
         })
     }
@@ -93,6 +108,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
     override fun updateTanpaFoto(
         token: String,
         id: Int,
+        pengirim : RequestBody,
         id_posko: RequestBody,
         jenis_kebutuhan: RequestBody,
         keterangan: RequestBody,
@@ -102,7 +118,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
         tanggal: RequestBody,
         method : RequestBody,
     ) {
-        val request = api.putPenerimaanLogistikTanpaFoto(token, id, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, method)
+        val request = api.putPenerimaanLogistikTanpaFoto(token, id, pengirim,  id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, method)
         request.enqueue(object : Callback<WrappedResponse<PenerimaanLogistik>>{
             override fun onResponse(
                 call: Call<WrappedResponse<PenerimaanLogistik>>,
@@ -129,6 +145,7 @@ class CreateOrUpdatePenerimaanActivityPresenter(v : PenerimaanLogisitkContract.C
                 view?.showToast("Tidak bisa koneksi ke server")
                 println(t.message)
                 t.printStackTrace()
+                view?.hideLoading()
             }
 
         })

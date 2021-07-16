@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.list_item_penerimaan_logistik.view.*
 class PenerimaanLogistikAdapter(private var data_penerimaan_logistik : List<PenerimaanLogistik>, private var context : Context, private var listener : onClickAdapterPenerimaan) : RecyclerView.Adapter<PenerimaanLogistikAdapter.MyHolder>(){
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data_penerimaan_logistik: PenerimaanLogistik, context: Context){
-            itemView.tvPoskoPenerima.text = data_penerimaan_logistik.id_posko.toString()
+            itemView.tvPengirim.text = data_penerimaan_logistik.pengirim
+            itemView.tvPoskoPenerima.text = data_penerimaan_logistik.posko_penerima
             itemView.tvJenisKebutuhan.text = data_penerimaan_logistik.jenis_kebutuhan
             itemView.tvJumlah.text = data_penerimaan_logistik.jumlah.toString()
             itemView.tvKeterangan.text = data_penerimaan_logistik.keterangan

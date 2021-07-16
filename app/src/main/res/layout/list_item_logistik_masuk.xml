@@ -168,6 +168,7 @@
                     android:id="@+id/ivFoto"
                     android:layout_width="200dp"
                     android:layout_height="100dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/image_satu"/>
 
             </LinearLayout>
@@ -177,7 +178,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnEdit"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
@@ -185,7 +188,9 @@
                     android:text="Ubah"
                     android:layout_marginRight="5dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/blue"
                     android:id="@+id/btnHapus"
                     android:layout_width="80dp"
                     android:layout_height="40dp"

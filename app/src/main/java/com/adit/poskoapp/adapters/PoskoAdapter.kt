@@ -10,13 +10,15 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.Posko
+import com.adit.poskoapp.models.User
 import com.adit.poskoapp.utils.PoskoUtils
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.list_item_posko.view.*
 import kotlinx.android.synthetic.main.list_item_posko.view.linearButton
 
 
-class PoskoAdapter(private var data: List<Posko>, private var context: Context) :
+class PoskoAdapter(private var data: List<Posko>, private var context: Context, private var listener : onClickAdapterPosko) :
     RecyclerView.Adapter<PoskoAdapter.MyHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         return MyHolder(
@@ -24,8 +26,18 @@ class PoskoAdapter(private var data: List<Posko>, private var context: Context) 
         )
     }
 
-    override fun onBindViewHolder(holder: MyHolder, position: Int) =
+    override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.bind(data[position], context)
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(data[position])
+        }
+
+        holder.itemView.btnHapus.setOnClickListener {
+            listener.delete(data[position])
+        }
+
+    }
+
 
     override fun getItemCount() = data.size
 
@@ -49,11 +61,33 @@ class PoskoAdapter(private var data: List<Posko>, private var context: Context) 
 
             val token = PoskoUtils.getToken(context)
             if(token == null || token.equals("UNDEFINED")){
-                itemView.linearButton.apply {
+                itemView.btnEdit.apply {
                     visibility = View.GONE
+                }
+
+                itemView.btnHapus.apply {
+                    visibility = View.GONE
+                }
+            }else{
+                val user = PoskoUtils.getList(context)
+                val listUser = Gson().fromJson(user, User::class.java)
+                println("USER " + listUser.id_posko)
+                if(posko.id != listUser.id_posko){
+                    itemView.btnEdit.apply {
+                        visibility = View.GONE
+                    }
+
+                    itemView.btnHapus.apply {
+                        visibility = View.GONE
+                    }
                 }
             }
         }
 
     }
+}
+
+interface onClickAdapterPosko{
+    fun edit(posko: Posko)
+    fun delete(posko: Posko)
 }

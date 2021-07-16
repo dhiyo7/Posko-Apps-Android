@@ -10,6 +10,7 @@ data class User (
     @SerializedName("nama") var nama : String? = null,
     @SerializedName("username") var username : String? = null,
     @SerializedName("level") var level : String? = null,
+    @SerializedName("id_posko") var id_posko : Int? = null,
 //    @SerializedName("email") var email : String? = null,
     @SerializedName("password") var password : String? = null,
     @SerializedName("token") var token : String? = null,

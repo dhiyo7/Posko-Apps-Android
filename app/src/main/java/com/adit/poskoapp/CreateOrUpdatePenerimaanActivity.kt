@@ -104,6 +104,7 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
 
     private fun fill(){
         if(!isNew()){
+            binding.etPengirim.setText(getPenerimaan()?.pengirim)
             binding.etKeterangan.setText(getPenerimaan()?.keterangan)
             binding.etJumlah.setText(getPenerimaan()?.jumlah.toString())
             binding.etDate.setText(getPenerimaan()?.tanggal)
@@ -129,6 +130,10 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
         binding.btnSubmit.setOnClickListener {
             showLoading()
             val token = PoskoUtils.getToken(this)
+
+            val pengirim = RequestBody.create(
+                MultipartBody.FORM, binding.etPengirim.text.toString()
+            )
 
             var objectPosko = binding.poskopenerima.selectedItem as Posko
 
@@ -182,12 +187,12 @@ class CreateOrUpdatePenerimaanActivity : AppCompatActivity(), PenerimaanLogisitk
                     showAlertDialog("Silahkan pilih foto")
                     return@setOnClickListener
                 }
-                presenter?.create(token!!, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal , image!!)
+                presenter?.create(token!!, pengirim, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal , image!!)
             }else{
                 if(choosedImage == null){
-                    presenter?.updateTanpaFoto(token!!, getPenerimaan()?.id!!.toInt(), id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, method)
+                    presenter?.updateTanpaFoto(token!!, getPenerimaan()?.id!!.toInt(), pengirim, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal, method)
                 }else{
-                    presenter?.update(token!!, getPenerimaan()?.id!!.toInt(), id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal , image!!, method)
+                    presenter?.update(token!!, getPenerimaan()?.id!!.toInt(), pengirim, id_posko, jenis_kebutuhan, keterangan, jumlah, satuan, status, tanggal , image!!, method)
                 }
             }
         }

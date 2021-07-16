@@ -1,5 +1,6 @@
 package com.adit.poskoapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -28,6 +29,14 @@ class LogistikKeluarActivity : AppCompatActivity(), LogistikKeluarActivityContra
         setSupportActionBar(findViewById(R.id.toolbarLogistikMasuk))
         binding.toolbarLayoutLogistikKeluar.title = "Logistik Keluar"
         setContentView(binding.root)
+
+        binding.fab.setOnClickListener {
+            startActivity(Intent(this@LogistikKeluarActivity, CreateOrUpdateLogistikKeluarActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            }).also{
+                finish()
+            }
+        }
     }
 
     override fun showToast(message: String) {
@@ -37,18 +46,22 @@ class LogistikKeluarActivity : AppCompatActivity(), LogistikKeluarActivityContra
     override fun attachLogistikKeluarRecycler(logistik_keluar: List<LogistikKeluar>) {
         logistikKeluarAdapter = LogistikKeluarAdapter(logistik_keluar, this@LogistikKeluarActivity, object: onClickLogistikKeluarAdapter{
             override fun edit(logistik_keluar: LogistikKeluar) {
-                TODO("Not yet implemented")
+                val intent = Intent(this@LogistikKeluarActivity, CreateOrUpdateLogistikKeluarActivity::class.java).apply {
+                    putExtra("IS_NEW", false)
+                    putExtra("LOGISTIK_KELUAR", logistik_keluar)
+                }
+
+                startActivity(intent).also{finish()}
             }
 
             override fun delete(logistik_keluar: LogistikKeluar) {
-                TODO("Not yet implemented")
+                delete(logistik_keluar?.id!!)
             }
 
         })
         rvLogistikKeluar.apply {
             layoutManager = LinearLayoutManager(this@LogistikKeluarActivity)
             adapter = logistikKeluarAdapter
-
         }
     }
 
@@ -79,6 +92,11 @@ class LogistikKeluarActivity : AppCompatActivity(), LogistikKeluarActivityContra
     private fun getData(){
         val token = PoskoUtils.getToken(this)
         presenter?.getLogistikKeluar(token!!)
+    }
+    
+    private fun delete(id: String){
+        val token = PoskoUtils.getToken(this)
+        presenter?.delete(token!!, id)
     }
 
     override fun onResume() {

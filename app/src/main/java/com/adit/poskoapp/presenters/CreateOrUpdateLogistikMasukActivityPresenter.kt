@@ -23,13 +23,12 @@ class CreateOrUpdateLogistikMasukActivityPresenter(v: LogistikMasukActivityContr
         keterangan : RequestBody,
         jumlah : RequestBody,
         pengirim : RequestBody,
-        posko_penerima : RequestBody,
         tanggal: RequestBody,
         status: RequestBody,
         satuan : RequestBody,
         foto : MultipartBody.Part
     ) {
-        val request = api.postLogistikMasuk(token, jenis_kebutuhan, keterangan, jumlah,pengirim, posko_penerima, tanggal, status, satuan, foto)
+        val request = api.postLogistikMasuk(token, jenis_kebutuhan, keterangan, jumlah,pengirim,  tanggal, status, satuan, foto)
         request.enqueue(object : Callback<WrappedResponse<LogistikMasuk>>{
             override fun onResponse(
                 call: Call<WrappedResponse<LogistikMasuk>>,
@@ -66,14 +65,13 @@ class CreateOrUpdateLogistikMasukActivityPresenter(v: LogistikMasukActivityContr
         keterangan: RequestBody,
         jumlah: RequestBody,
         pengirim: RequestBody,
-        posko_penerima: RequestBody,
         tanggal: RequestBody,
         status: RequestBody,
         satuan: RequestBody,
         foto: MultipartBody.Part,
         method: RequestBody
     ) {
-        val request = api.putLogistikMasuk(token, id, jenis_kebutuhan, keterangan, jumlah,pengirim, posko_penerima, tanggal, status, satuan, foto, method)
+        val request = api.putLogistikMasuk(token, id, jenis_kebutuhan, keterangan, jumlah,pengirim, tanggal, status, satuan, foto, method)
         request.enqueue(object : Callback<WrappedResponse<LogistikMasuk>>{
             override fun onResponse(
                 call: Call<WrappedResponse<LogistikMasuk>>,
@@ -110,13 +108,12 @@ class CreateOrUpdateLogistikMasukActivityPresenter(v: LogistikMasukActivityContr
         keterangan: RequestBody,
         jumlah: RequestBody,
         pengirim: RequestBody,
-        posko_penerima: RequestBody,
         tanggal: RequestBody,
         status: RequestBody,
         satuan: RequestBody,
         method: RequestBody
     ) {
-        val request = api.putLogistikMasukTanpaFoto(token, id, jenis_kebutuhan, keterangan, jumlah,pengirim, posko_penerima, tanggal, status, satuan, method)
+        val request = api.putLogistikMasukTanpaFoto(token, id, jenis_kebutuhan, keterangan, jumlah,pengirim, tanggal, status, satuan, method)
         request.enqueue(object : Callback<WrappedResponse<LogistikMasuk>>{
             override fun onResponse(
                 call: Call<WrappedResponse<LogistikMasuk>>,

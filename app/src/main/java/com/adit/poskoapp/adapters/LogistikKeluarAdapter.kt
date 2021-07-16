@@ -12,9 +12,8 @@ import kotlinx.android.synthetic.main.list_item_logistik_keluar.view.*
 class LogistikKeluarAdapter(private var logistik_keluar : List<LogistikKeluar>, private var context: Context, private var listener : onClickLogistikKeluarAdapter) : RecyclerView.Adapter<LogistikKeluarAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(logistik_keluar: LogistikKeluar, context: Context){
-            itemView.tvPengirim.text = logistik_keluar.pengirim
-            itemView.tvPoskoPenerima.text = logistik_keluar.id_posko
-            itemView.tvJenisKebutuhan.text = logistik_keluar.jumlah
+            itemView.tvPoskoPenerima.text = logistik_keluar.posko_penerima
+            itemView.tvJenisKebutuhan.text = logistik_keluar.jenis_kebutuhan
             itemView.tvKeterangan.text = logistik_keluar.keterangan
             itemView.tvJumlah.text = logistik_keluar.jumlah
             itemView.tvTanggal.text = logistik_keluar.tanggal
@@ -27,6 +26,13 @@ class LogistikKeluarAdapter(private var logistik_keluar : List<LogistikKeluar>, 
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         holder.bind(logistik_keluar[position], context)
+        holder.itemView.btnEdit.setOnClickListener {
+            listener.edit(logistik_keluar[position])
+        }
+
+        holder.itemView.btnHapus.setOnClickListener {
+            listener.delete(logistik_keluar[position])
+        }
     }
 
     override fun getItemCount() = logistik_keluar.size

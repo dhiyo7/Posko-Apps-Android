@@ -31,9 +31,9 @@ interface PenerimaanLogisitkContract {
     }
 
     interface CreateOrUpdateInteraction{
-        fun create(token: String, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part)
-        fun update(token: String, id: Int, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part, method: RequestBody)
-        fun updateTanpaFoto(token: String, id: Int, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, method: RequestBody)
+        fun create(token: String, pengirim : RequestBody, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part)
+        fun update(token: String, id: Int, pengirim : RequestBody, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, foto: MultipartBody.Part, method: RequestBody)
+        fun updateTanpaFoto(token: String, id: Int, pengirim : RequestBody, id_posko: RequestBody, jenis_kebutuhan : RequestBody, keterangan : RequestBody, jumlah: RequestBody, satuan: RequestBody, status: RequestBody, tanggal : RequestBody, method: RequestBody)
         fun getPosko()
         fun destroy()
     }

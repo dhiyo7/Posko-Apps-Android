@@ -4,6 +4,7 @@ import com.adit.poskoapp.contracts.LogistikKeluarActivityContract
 import com.adit.poskoapp.models.LogistikKeluar
 import com.adit.poskoapp.webservices.PoskoAPI
 import com.adit.poskoapp.webservices.WrappedListResponse
+import com.adit.poskoapp.webservices.WrappedResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +44,37 @@ class LogistikKeluarActivityPresenter(v : LogistikKeluarActivityContract.Logisti
             }
         })
 
+    }
+
+    override fun delete(token: String, id: String) {
+        val request = api.deleteLogistikKeluar(token, id)
+        request.enqueue(object : Callback<WrappedResponse<LogistikKeluar>>{
+            override fun onResponse(
+                call: Call<WrappedResponse<LogistikKeluar>>,
+                response: Response<WrappedResponse<LogistikKeluar>>
+            ) {
+                if(response.isSuccessful){
+                    val body = response.body()
+                    if(body != null){
+                        view?.showToast(body.message!!)
+                        view?.hideLoading()
+                        getLogistikKeluar(token)
+                    }else{
+                        view?.showToast("Terjadi kesalahan")
+                        view?.hideLoading()
+                    }
+                }else{
+                    view?.showToast(response?.body()?.message.toString())
+                    view?.hideLoading()
+                }
+            }
+
+            override fun onFailure(call: Call<WrappedResponse<LogistikKeluar>>, t: Throwable) {
+                view?.showToast("Tidak bisa koneksi ke server")
+                view?.hideLoading()
+            }
+
+        })
     }
 
     override fun destroy() {

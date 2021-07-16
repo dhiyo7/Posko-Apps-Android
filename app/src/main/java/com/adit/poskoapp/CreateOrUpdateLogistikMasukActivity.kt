@@ -63,12 +63,6 @@ class CreateOrUpdateLogistikMasukActivity : AppCompatActivity(), LogistikMasukAc
     }
 
     override fun attachToSpinner(posko: List<Posko>) {
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, posko)
-
-        binding.spinnerPosko.apply {
-            adapter = spinnerAdapter
-        }
-
         val spinnerJenisAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
             R.array.jenis_kebutuhan_array
         ))
@@ -84,17 +78,9 @@ class CreateOrUpdateLogistikMasukActivity : AppCompatActivity(), LogistikMasukAc
         ))
         binding.spinnerSatuan.adapter = spinnerSatuanAdapter
 
-        val spinnerPoskoPenerimaAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(
-            R.array.posko_penerima_pengirim
-        ))
-        binding.spinnerPosko.adapter = spinnerPoskoPenerimaAdapter
-
         if(!isNew()){
             val selectedJenis = spinnerJenisAdapter.getPosition(getLogistikMasuk()?.jenis_kebutuhan)
             binding.spinnerJenis.setSelection(selectedJenis)
-
-            val selectedPosko = spinnerPoskoPenerimaAdapter.getPosition(getLogistikMasuk()?.posko_penerima)
-            binding.spinnerPosko.setSelection(selectedPosko)
 
             val selectedStatus = spinnerStatusAdapter.getPosition(getLogistikMasuk()?.status)
             binding.spinnerStatus.setSelection(selectedStatus)
@@ -145,10 +131,6 @@ class CreateOrUpdateLogistikMasukActivity : AppCompatActivity(), LogistikMasukAc
                 MultipartBody.FORM, binding.etPengirim.text.toString()
             )
 
-            val posko_penerima = RequestBody.create(
-                MultipartBody.FORM, binding.spinnerPosko.selectedItem.toString()
-            )
-
             val tanggal = RequestBody.create(
                 MultipartBody.FORM, binding.etDate.text.toString()
             )
@@ -181,12 +163,12 @@ class CreateOrUpdateLogistikMasukActivity : AppCompatActivity(), LogistikMasukAc
             )
 
             if(isNew()){
-                presenter?.create(token!!, jenis_kebutuhan, keterangan, jumlah, pengirim, posko_penerima, tanggal, status, satuan, image!!)
+                presenter?.create(token!!, jenis_kebutuhan, keterangan, jumlah, pengirim, tanggal, status, satuan, image!!)
             }else{
                 if(choosedImage == null){
-                    presenter?.updateTanpaFoto(token!!, getLogistikMasuk()?.id!!.toInt(), jenis_kebutuhan, keterangan, jumlah, pengirim, posko_penerima, tanggal, status, satuan, method)
+                    presenter?.updateTanpaFoto(token!!, getLogistikMasuk()?.id!!.toInt(), jenis_kebutuhan, keterangan, jumlah, pengirim, tanggal, status, satuan, method)
                 }else{
-                    presenter?.update(token!!, getLogistikMasuk()?.id!!.toInt(), jenis_kebutuhan, keterangan, jumlah, pengirim, posko_penerima, tanggal, status, satuan, image!!, method)
+                    presenter?.update(token!!, getLogistikMasuk()?.id!!.toInt(), jenis_kebutuhan, keterangan, jumlah, pengirim, tanggal, status, satuan, image!!, method)
                 }
             }
         }

@@ -29,8 +29,8 @@ interface KebutuhanLogistikActivityContract {
     }
 
     interface CreateOrUpdateInteraction{
-        fun create(token: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, status: String, tanggal : String)
-        fun update(token: String, id: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, status: String, tanggal : String)
+        fun create(token: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, status: String, tanggal : String, satuan : String,)
+        fun update(token: String, id: String, id_posko: String, jenis_kebutuhan : String, keterangan : String, jumlah: String, status: String, tanggal : String, satuan : String,)
         fun getPosko()
         fun destroy()
     }

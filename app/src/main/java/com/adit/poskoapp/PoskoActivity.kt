@@ -1,5 +1,6 @@
 package com.adit.poskoapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adit.poskoapp.adapters.PoskoAdapter
+import com.adit.poskoapp.adapters.onClickAdapterPosko
 import com.adit.poskoapp.contracts.PoskoActivityContract
 import com.adit.poskoapp.databinding.ActivityPoskoBinding
 import com.adit.poskoapp.models.Posko
@@ -32,8 +34,10 @@ class PoskoActivity : AppCompatActivity() , PoskoActivityContract.View{
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = "Daftar Posko"
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val intent = Intent(this@PoskoActivity, CreateOrUpdatePoskoActivity::class.java).apply {
+                putExtra("IS_NEW", true)
+            }
+            startActivity(intent)
         }
         hideButtonWhenNotAuth()
     }
@@ -52,8 +56,29 @@ class PoskoActivity : AppCompatActivity() , PoskoActivityContract.View{
     override fun attachToRecycle(posko: List<Posko>) {
         rvPosko.apply {
             layoutManager = LinearLayoutManager(this@PoskoActivity)
-            adapter = PoskoAdapter(posko, this@PoskoActivity)
+            adapter = PoskoAdapter(posko, this@PoskoActivity, object : onClickAdapterPosko{
+                override fun edit(posko: Posko) {
+                    val intent = Intent(this@PoskoActivity, CreateOrUpdatePoskoActivity::class.java).apply {
+                        putExtra("IS_NEW", false)
+                        putExtra("POSKO", posko)
+                    }
+
+                    startActivity(intent).also {
+                        finish()
+                    }
+                }
+
+                override fun delete(posko: Posko) {
+                    delete(posko.id.toString())
+                }
+
+            })
         }
+    }
+
+    private fun delete(id: String){
+        val token = PoskoUtils.getToken(this)
+        presenter?.delete(token!!, id)
     }
 
     override fun toast(message: String?) {
