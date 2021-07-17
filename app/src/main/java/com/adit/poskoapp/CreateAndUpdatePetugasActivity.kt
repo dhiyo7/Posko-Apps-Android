@@ -22,9 +22,10 @@ class CreateAndUpdatePetugasActivity : AppCompatActivity(), PetugasActivityContr
         super.onCreate(savedInstanceState)
         binding = ActivityCreateAndUpdatePetugasBinding.inflate(layoutInflater)
         presenter = CreateAndUpdatePetugasActivityPresenter(this)
-        setupSpinnerLevel()
+//        setupSpinnerLevel()
         doSave()
         fill()
+        binding.etLevel.setText("Petugas")
         setContentView(binding.root)
     }
 
@@ -34,13 +35,8 @@ class CreateAndUpdatePetugasActivity : AppCompatActivity(), PetugasActivityContr
 
     private fun fill(){
         if(!isNew()){
-            binding.etNama.setText(getPetugas()?.nama)
             binding.etUsername.setText(getPetugas()?.username)
-            if(getPetugas()?.level == "Petugas"){
-                binding.level.setSelection(1)
-            }else{
-                binding.level.setSelection(0)
-            }
+            binding.etLevel.setText("Petugas")
             binding.etPassWord.setText(getPetugas()?.password)
             binding.etConfirmPass.setText(getPetugas()?.password)
         }
@@ -51,11 +47,11 @@ class CreateAndUpdatePetugasActivity : AppCompatActivity(), PetugasActivityContr
         binding.btnSubmit.setOnClickListener {
             val token = PoskoUtils.getToken(this)
 
-            var nama = binding.etNama.text.toString()
+            var nama = binding.etUsername.text.toString()
             var username = binding.etUsername.text.toString()
             var password = binding.etPassWord.text.toString()
             var konfirmasi_password = binding.etConfirmPass.text.toString()
-            var level = binding.level.selectedItem
+            var level = binding.etLevel.text.toString()
 
             var objectPosko = binding.idPosko.selectedItem as Posko
 
@@ -69,10 +65,10 @@ class CreateAndUpdatePetugasActivity : AppCompatActivity(), PetugasActivityContr
         }
     }
 
-    private fun setupSpinnerLevel() {
-        val spinnerLevelAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.level_array))
-        binding.level.adapter = spinnerLevelAdapter
-    }
+//    private fun setupSpinnerLevel() {
+//        val spinnerLevelAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.level_array))
+//        binding.level.adapter = spinnerLevelAdapter
+//    }
 
     override fun attachToSpinner(posko: List<Posko>) {
         var spinnerAdapterPosko = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, posko)

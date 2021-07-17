@@ -39,25 +39,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inNama"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama"
-            app:boxStrokeColor="@color/design_default_color_primary"
-            app:errorEnabled="true"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:layout_editor_absoluteX="20dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etNama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inUsername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -112,26 +93,37 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RelativeLayout
-            android:id="@+id/div_kota"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inLevel"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/spinner_background">
+            android:hint="Petugas"
+            android:enabled="false"
+            app:boxStrokeColor="@color/design_default_color_primary"
+            app:errorEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:layout_editor_absoluteX="20dp">
 
-            <Spinner
-                android:id="@+id/level"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLevel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                />
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Posko"
+            android:textSize="14sp" />
 
         <RelativeLayout
             android:id="@+id/posko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/spinner_background">
 
             <Spinner

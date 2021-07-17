@@ -71,8 +71,17 @@ class PoskoAdapter(private var data: List<Posko>, private var context: Context, 
             }else{
                 val user = PoskoUtils.getList(context)
                 val listUser = Gson().fromJson(user, User::class.java)
-                println("USER " + listUser.id_posko)
-                if(posko.id != listUser.id_posko){
+//                if(posko.id != listUser.id_posko){
+//                    itemView.btnEdit.apply {
+//                        visibility = View.GONE
+//                    }
+//
+//                    itemView.btnHapus.apply {
+//                        visibility = View.GONE
+//                    }
+//                }
+
+                if(listUser.level != "Admin"){
                     itemView.btnEdit.apply {
                         visibility = View.GONE
                     }

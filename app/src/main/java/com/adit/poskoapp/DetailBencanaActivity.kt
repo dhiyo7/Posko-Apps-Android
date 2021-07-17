@@ -20,9 +20,8 @@ class DetailBencanaActivity : AppCompatActivity() {
 
     private fun parseData(){
         println(getDetailBencana())
-        binding.tvNamaBencana.text = "Nama Bencana : "+getDetailBencana()?.nama
+        binding.tvNamaBencana.text = getDetailBencana()?.nama + " - " +getDetailBencana()?.date
         binding.ivBencana.load(getDetailBencana()?.foto)
-        binding.tvTanggalBencana.text = "Tanggal Bencana : "+ getDetailBencana()?.date
         binding.tvDescription.text = getDetailBencana()?.detail
     }
 }

@@ -12,7 +12,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.adit.poskoapp.databinding.ActivityLocationPickerBinding
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.places.Place
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
+import com.google.android.gms.location.places.ui.PlaceSelectionListener
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,12 +24,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_location_picker.*
 
+@Suppress("DEPRECATION")
 class LocationPickerActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
     private lateinit var binding : ActivityLocationPickerBinding
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var googleMap: GoogleMap
     private lateinit var myLocation : Location
+    private lateinit var autocompleteFragment : PlaceAutocompleteFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +40,12 @@ class LocationPickerActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         setContentView(binding.root)
 
         mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync({
+        mapFragment.getMapAsync {
             googleMap = it
             googleMap?.setOnMapClickListener(this@LocationPickerActivity)
-        })
+        }
+
+        searchBox()
     }
 
     override fun onMapClick(p0: LatLng) {
@@ -52,6 +61,25 @@ class LocationPickerActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         }
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
+    }
+
+    private fun searchBox(){
+        autocompleteFragment = fragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment;
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
+            override fun onPlaceSelected(p0: Place?) {
+                googleMap.clear()
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(p0?.latLng))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p0?.latLng, 15f))
+                println("Place Selected : "+ p0?.name)
+            }
+
+            override fun onError(p0: Status?) {
+                println("STATUS ERROR " + p0)
+                Toast.makeText(this@LocationPickerActivity, "Tidak bisa mencari lokasi", Toast.LENGTH_LONG).show()
+            }
+
+        })
+
     }
 
     override fun onMapReady(p0: GoogleMap) {

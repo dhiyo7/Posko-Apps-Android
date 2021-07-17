@@ -17,6 +17,8 @@ class LogistikKeluarAdapter(private var logistik_keluar : List<LogistikKeluar>, 
             itemView.tvKeterangan.text = logistik_keluar.keterangan
             itemView.tvJumlah.text = logistik_keluar.jumlah
             itemView.tvTanggal.text = logistik_keluar.tanggal
+            itemView.tvSatuan.text = logistik_keluar.satuan
+            itemView.tvStatus.text = logistik_keluar.status
         }
     }
 
