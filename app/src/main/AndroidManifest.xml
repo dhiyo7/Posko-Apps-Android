@@ -20,7 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PoskoApp">
-        <activity android:name=".SplashScreenActivity"></activity>
+        <activity android:name=".CreateOrUpdatePenyaluranActivity"></activity>
+        <activity
+            android:name=".PenyaluranActivity"
+            android:label="@string/title_activity_penyaluran" />
+        <activity android:name=".SplashScreenActivity" />
         <activity android:name=".CreateOrUpdatePoskoActivity" />
         <activity android:name=".LocationPickerActivity" />
 
@@ -66,8 +70,7 @@
         <activity android:name=".PetugasActivity" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.PoskoApp.NoActionBar"
-            />
+            android:theme="@style/Theme.PoskoApp.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

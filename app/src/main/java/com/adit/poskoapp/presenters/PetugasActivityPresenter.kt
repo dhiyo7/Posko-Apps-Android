@@ -30,7 +30,7 @@ class PetugasActivityPresenter(v: PetugasActivityContract.PetugasActivityView?) 
                         if(body.data.size == 0){
                             view?.showDataEmpty()
                         }else{
-                            view?.attachPetugasRecycler(body.data)
+                            view?.attachPetugasRecycler(body.data as ArrayList<Petugas>)
                         }
 
                         view?.hideLoading()

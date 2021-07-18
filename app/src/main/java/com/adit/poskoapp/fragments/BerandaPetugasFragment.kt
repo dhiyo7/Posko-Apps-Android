@@ -41,5 +41,9 @@ class BerandaPetugasFragment : Fragment() {
         binding.kebutuhanLogistik.setOnClickListener {
             startActivity(Intent(activity, KebutuhanLogistikActivity::class.java))
         }
+
+        binding.penyaluran.setOnClickListener {
+            startActivity(Intent(activity, PenyaluranActivity::class.java))
+        }
     }
 }

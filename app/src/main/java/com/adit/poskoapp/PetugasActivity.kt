@@ -3,8 +3,10 @@ package com.adit.poskoapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adit.poskoapp.adapters.PetugasAdapter
 import com.adit.poskoapp.adapters.onClickAdapter
@@ -13,12 +15,14 @@ import com.adit.poskoapp.databinding.ActivityPetugasBinding
 import com.adit.poskoapp.models.Petugas
 import com.adit.poskoapp.presenters.PetugasActivityPresenter
 import com.adit.poskoapp.utils.PoskoUtils
+import kotlinx.android.synthetic.main.activity_petugas.*
 
-class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActivityView {
+class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActivityView{
 
     private lateinit var binding : ActivityPetugasBinding
     private var presenter : PetugasActivityContract.PetugasActivityPresenter? = null
     private lateinit var adapterPetugas : PetugasAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +38,19 @@ class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActi
             }
         }
 
+        binding.searchPetugas.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapterPetugas.filter.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapterPetugas.filter.filter(newText)
+                return false
+            }
+
+        })
+
         setContentView(binding.root)
     }
 
@@ -41,7 +58,7 @@ class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActi
         Toast.makeText(this@PetugasActivity, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun attachPetugasRecycler(petugas: List<Petugas>) {
+    override fun attachPetugasRecycler(petugas: ArrayList<Petugas>) {
         binding.rvPetugas.apply {
             adapterPetugas = PetugasAdapter(petugas, this@PetugasActivity, object: onClickAdapter{
                 override fun edit(petugas: Petugas) {
@@ -112,4 +129,5 @@ class PetugasActivity : AppCompatActivity(), PetugasActivityContract.PetugasActi
         super.onDestroy()
         presenter?.destroy()
     }
+
 }

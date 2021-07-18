@@ -1,24 +1,20 @@
 package com.adit.poskoapp.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.adit.poskoapp.CreateAndUpdatePetugasActivity
 import com.adit.poskoapp.R
 import com.adit.poskoapp.models.Petugas
 import kotlinx.android.synthetic.main.list_item_petugas.view.*
 
-class PetugasAdapter(private var petugas: List<Petugas>, private var context: Context, private var onClickAdapter: onClickAdapter): RecyclerView.Adapter<PetugasAdapter.MyHolder>(), Filterable {
-    private var filterList = ArrayList<Petugas>()
+class PetugasAdapter(private var petugas: ArrayList<Petugas>, private var context: Context, private var onClickAdapter: onClickAdapter): RecyclerView.Adapter<PetugasAdapter.MyHolder>(), Filterable{
+    private var petugasList = petugas
+    private var petugasFull = ArrayList<Petugas>(petugasList)
 
-    init {
-        filterList = petugas as ArrayList<Petugas>
-    }
 
     inner class MyHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(petugas : Petugas, context: Context){
@@ -34,6 +30,8 @@ class PetugasAdapter(private var petugas: List<Petugas>, private var context: Co
     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int){
+        holder.bind(petugasList[position], context)
+
         holder.itemView.btnHapus.setOnClickListener {
             onClickAdapter.showDialog(petugas[position])
         }
@@ -48,15 +46,34 @@ class PetugasAdapter(private var petugas: List<Petugas>, private var context: Co
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
+                var filteredList  = ArrayList<Petugas>()
+
+                if(constraint == null || constraint.length == 0){
+                    filteredList.addAll(petugasFull)
+                }else{
+                    var filterPattern : String = constraint.toString().lowercase().trim()
+
+                    for(item in petugasFull){
+                        if(item.username?.lowercase()!!.contains(filterPattern)){
+                            filteredList.add(item)
+                        }
+                    }
+                }
+                var results : FilterResults = FilterResults()
+                results.values = filteredList
+
+                return results
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                TODO("Not yet implemented")
+                petugasList.clear()
+                petugasList.addAll(results?.values as ArrayList<Petugas>)
+                notifyDataSetChanged()
             }
 
         }
     }
+
 }
 
 interface onClickAdapter{

@@ -378,6 +378,64 @@ interface PengaduanAPIService {
         @Path("id") id : String,
     ) : Call<WrappedResponse<KebutuhanLogistik>>
 
+    @GET("api/penyaluran")
+    fun getPenyaluran(
+        @Header("Authorization") token : String,
+    ) : Call<WrappedListResponse<Penyaluran>>
+
+    @Multipart
+    @POST("api/penyaluran")
+    fun postPenyaluran(
+        @Header("Authorization") token: String?,
+        @Part("nama_penerima") nama_penerima: RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("alamat") alamat : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part foto : MultipartBody.Part
+    ) : Call<WrappedResponse<Penyaluran>>
+
+    @Multipart
+    @POST("api/penyaluran/{id}")
+    fun putPenyaluran(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Part("nama_penerima") nama_penerima: RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("alamat") alamat : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part foto : MultipartBody.Part,
+        @Part("_method") method : RequestBody,
+    ) : Call<WrappedResponse<Penyaluran>>
+
+    @Multipart
+    @POST("api/penyaluran/{id}")
+    fun putPenyaluranTanpaFoto(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+        @Part("nama_penerima") nama_penerima: RequestBody,
+        @Part("jenis_kebutuhan") jenis_kebutuhan : RequestBody,
+        @Part("jumlah") jumlah : RequestBody,
+        @Part("satuan") satuan : RequestBody,
+        @Part("status") status : RequestBody,
+        @Part("keterangan") keterangan : RequestBody,
+        @Part("alamat") alamat : RequestBody,
+        @Part("tanggal") tanggal : RequestBody,
+        @Part("_method") method : RequestBody,
+    ) : Call<WrappedResponse<Penyaluran>>
+
+    @DELETE("api/penyaluran/{id}")
+    fun deletePenyaluran(
+        @Header("Authorization") token: String?,
+        @Path("id") id : String,
+    ) : Call<WrappedResponse<Penyaluran>>
 
 }
 

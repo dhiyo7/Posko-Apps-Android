@@ -6,7 +6,7 @@ import com.adit.poskoapp.models.Posko
 interface PetugasActivityContract {
     interface PetugasActivityView {
         fun showToast(message : String)
-        fun attachPetugasRecycler(petugas : List<Petugas>)
+        fun attachPetugasRecycler(petugas : ArrayList<Petugas>)
         fun showLoading()
         fun hideLoading()
         fun showDataEmpty()
